@@ -1,12 +1,17 @@
 import Header from '../ui/Header';
 import Sidebar from '../ui/Sidebar';
+import { Outlet } from 'react-router-dom';
+import BreadCrumbs from '../ui/BreadCrumbs';
 
-function AppLayout({ children }) {
+function AppLayout() {
   return (
-    <div className='flex h-screen flex-col bg-slate-900 pl-80 text-white'>
+    <div className='flex min-h-screen flex-col bg-slate-900 pl-80 text-white'>
       <Header />
       <Sidebar />
-      <main className='flex-grow p-6'>{children}</main>
+      <main className='flex-grow p-6'>
+        <BreadCrumbs className='mb-4' />
+        <Outlet />
+      </main>
     </div>
   );
 }

@@ -2,11 +2,11 @@ import Icon from './Icon';
 
 const data = [
   {
-    label: 'Головна',
+    label: 'Главная',
     path: '/',
   },
   {
-    label: 'Загальний звіт',
+    label: 'Общий отчет',
     path: null,
   },
 ];
