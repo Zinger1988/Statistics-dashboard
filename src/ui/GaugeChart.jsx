@@ -44,7 +44,7 @@ function GaugeChart({ data, className, ...props }) {
         </div>
         <div
           style={{ transform: `rotate(${data.value / step}deg)` }}
-          className={`after:content[""] before:content[""] after:border-top-0 absolute bottom-0 left-0 z-10 w-1/2 origin-right before:absolute before:left-[7px] before:top-0 before:h-[6px] before:w-10 before:-translate-y-1/2 before:bg-gradient-to-r before:from-slate-400 after:absolute after:left-1 after:top-0 after:-translate-y-1/2 after:border-[3px] after:border-l-0 after:border-transparent after:border-r-slate-400`}
+          className={`after:content[""] after:border-top-0 absolute bottom-0 left-0 z-10 w-1/2 origin-right before:absolute after:absolute after:left-1 after:top-0 after:-translate-y-1/2 after:border-[8px] after:border-r-[12px] after:border-l-0 after:border-transparent after:border-r-slate-400`}
         ></div>
         <div className='absolute right-full top-[calc(100%+4px)] translate-x-1/2 text-xs text-slate-500'>
           0

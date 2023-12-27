@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@layer components {
+/* @layer components {
   .test {
     @apply text-test text-huge font-bold;
   }
-}
+} */

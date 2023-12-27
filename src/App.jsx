@@ -1,6 +1,6 @@
 import { HeaderProvider } from './context/HeaderContext';
 import AppLayout from './layouts/AppLayout';
-import IncomeDynamics from './pages/IncomeDynamics';
+import Main from './pages/Main';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     <HeaderProvider>
       <Routes>
         <Route element={<AppLayout />}>
-          <Route path='/' element={<IncomeDynamics />} />
+          <Route path='/' element={<Main />} />
         </Route>
       </Routes>
     </HeaderProvider>
