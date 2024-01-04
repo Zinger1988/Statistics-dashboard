@@ -1,13 +1,10 @@
 import { useEffect } from 'react';
 
-import Box from '../../ui/Box';
-import GaugeChart from '../../ui/GaugeChart';
-import Legend from '../../ui/Legend';
-import LineChart from '../../ui/LineChart';
-
-import { useHeader } from '../../context/HeaderContext';
-import { incomeDynamicsMock as pageData } from './IncomeDynamicsMock';
+import { Box, GaugeChart, Legend, LineChart } from '../../ui';
 import CommonReportFilters from './CommonReportFilters';
+
+import { incomeDynamicsMock as pageData } from './IncomeDynamicsMock';
+import { useHeader } from '../../context/HeaderContext';
 
 function CommonReport() {
   const { setHeader, setSubHeader } = useHeader();
@@ -16,6 +13,10 @@ function CommonReport() {
   const incomeDynamics = pageData.find((item) => item.id === 'graph-1');
   const completeDynamics = pageData.find((item) => item.id === 'graph-2');
   const monthShipments = pageData.filter((item) => item.id.includes('scalar'));
+  const filters = pageData.filter((item) => item.type === 'select');
+
+  const getLegend = (chartData) =>
+    chartData.map(({ id, color }) => ({ id, color }));
 
   useEffect(() => {
     setHeader(headerData.title);
@@ -25,21 +26,15 @@ function CommonReport() {
   return (
     <div className='grid grid-cols-12 items-start gap-5'>
       <div className='col-span-9'>
-        <CommonReportFilters />
+        <CommonReportFilters filters={filters} />
       </div>
       <Box className='col-span-9' label={incomeDynamics.title}>
-        <Legend
-          data={incomeDynamics.lines.map(({ id, color }) => ({ id, color }))}
-          className='mb-3'
-        />
+        <Legend data={getLegend(incomeDynamics.lines)} className='mb-3' />
         <LineChart className='h-96' data={incomeDynamics} />
       </Box>
       <Box className='col-span-9' label={completeDynamics.title}>
-        <Legend
-          data={completeDynamics.lines.map(({ id, color }) => ({ id, color }))}
-          className='mb-3'
-        />
-        <LineChart className='h-64' data={completeDynamics} />
+        <Legend data={getLegend(completeDynamics.lines)} className='mb-3' />
+        <LineChart className='h-60' data={completeDynamics} />
       </Box>
       <Box
         className='col-span-3 col-start-10 row-span-3 row-start-1'

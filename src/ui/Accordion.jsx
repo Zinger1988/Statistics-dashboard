@@ -3,8 +3,8 @@ import Icon from './Icon';
 
 const AccordionContext = createContext();
 
-function Accordion({ children, onlyOne = true }) {
-  const [activeItems, setActiveItems] = useState([]);
+function Accordion({ children, onlyOne = true, active = '' }) {
+  const [activeItems, setActiveItems] = useState([active]);
 
   const toggleActiveItems = (id) => {
     const isActive = activeItems.find((itemId) => itemId === id);

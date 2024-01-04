@@ -1,8 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import Header from '../ui/Header';
-import Sidebar from '../ui/Sidebar';
-import BreadCrumbs from '../ui/BreadCrumbs';
+import { Header, Sidebar, BreadCrumbs } from '../ui';
 
 function AppLayout() {
   return (

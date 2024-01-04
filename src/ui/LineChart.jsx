@@ -5,8 +5,6 @@ import { theme } from '../utils/lineChartTheme';
 import { hex2rgb } from '../utils/helpers';
 
 function LineChart({ data, className = '', isLoading = false }) {
-  console.log(data);
-
   const valuesY = data.lines.flatMap((d) => d.data.map((i) => i.y));
   const minY = 0;
   const maxY = Math.max(...valuesY);
