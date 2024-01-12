@@ -1,13 +1,13 @@
 import { useEffect } from 'react';
 
-import CommonReport from '../features/CommonReport/CommonReport';
+import EngineerDetails from '../features/Engineers/EngineerDetails';
 import { Loader } from '../ui';
 
 import { useHeader } from '../context/HeaderContext';
-import { useCommonReport } from '../features/CommonReport/useCommonReport';
+import { useEngineerDetails } from '../features/Engineers/useEngineerDetails';
 
-function Main() {
-  const { isLoading, data, error } = useCommonReport();
+function SingleEngineer() {
+  const { isLoading, data, error } = useEngineerDetails();
   const { setHeader, setSubHeader } = useHeader();
 
   useEffect(() => {
@@ -21,7 +21,7 @@ function Main() {
     return <Loader className='flex grow items-center justify-center' />;
   }
 
-  return <CommonReport report={data} />;
+  return <EngineerDetails engineer={data} />;
 }
 
-export default Main;
+export default SingleEngineer;

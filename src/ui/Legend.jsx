@@ -1,6 +1,6 @@
 function Legend({ data, className, ...props }) {
   return (
-    <ul className={`flex flex-wrap gap-7 ${className}`}>
+    <ul className={`flex flex-wrap gap-7 gap-y-2 ${className}`}>
       {data.map(({ id, color }) => (
         <li key={id} className='flex items-center gap-3 text-xs'>
           <span

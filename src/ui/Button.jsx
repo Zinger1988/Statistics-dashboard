@@ -11,7 +11,7 @@ function Button({
   const ButtonElement = props.to ? Link : 'button';
 
   const sizeMap = {
-    sm: '',
+    sm: 'inline-flex py-1 px-2.5 rounded-[4px] text-sm',
     md: 'inline-flex py-2 px-4 rounded-[4px] text-sm',
     lg: '',
   };
@@ -20,7 +20,7 @@ function Button({
     primary:
       'bg-blue-500 text-white hover:ring-[3px] hover:ring-blue-500/40 border border-blue-500',
     outline:
-      'border-slate-500 border hover:ring-[3px] hover:ring-blue-500/40 hover:border-blue-500',
+      'border-slate-600 bg-slate-800/50 border hover:ring-[3px] hover:ring-blue-500/40 hover:border-blue-500',
     disabled:
       'cursor-no-drop bg-slate-700 text-white/20 border border-slate-600',
   };

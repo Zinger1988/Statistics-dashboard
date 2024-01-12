@@ -8,8 +8,8 @@ function GaugeChart({ data, className, ...props }) {
   //Convert values to CSS conic cradient value
   const CSSValue = data.ranges.reduce((acc, cur) => {
     return `${acc ? `${acc} ,` : acc} ${cur.color} ${Math.floor(
-      cur.min / step,
-    )}deg ${Math.floor(cur.max / step)}deg`;
+      cur.min / step + 8,
+    )}deg ${Math.floor(cur.max / step - 8)}deg`;
   }, '');
 
   //Get active status index for selection of proper icon and color
@@ -25,7 +25,7 @@ function GaugeChart({ data, className, ...props }) {
 
   return (
     <div
-      className={`flex max-w-[200px] flex-col items-center gap-5 ${className}`}
+      className={`flex max-w-[200px] flex-col items-center gap-6 ${className}`}
     >
       <div
         style={{
@@ -44,7 +44,7 @@ function GaugeChart({ data, className, ...props }) {
         </div>
         <div
           style={{ transform: `rotate(${data.value / step}deg)` }}
-          className={`after:content[""] after:border-top-0 absolute bottom-0 left-0 z-10 w-1/2 origin-right before:absolute after:absolute after:left-1 after:top-0 after:-translate-y-1/2 after:border-[8px] after:border-r-[12px] after:border-l-0 after:border-transparent after:border-r-slate-400`}
+          className={`after:content[""] after:border-top-0 absolute bottom-0 left-0 z-10 w-1/2 origin-right before:absolute after:absolute after:left-1 after:top-0 after:-translate-y-1/2 after:border-[8px] after:border-l-0 after:border-r-[12px] after:border-transparent after:border-r-slate-400`}
         ></div>
         <div className='absolute right-full top-[calc(100%+4px)] translate-x-1/2 text-xs text-slate-500'>
           0

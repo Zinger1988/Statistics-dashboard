@@ -6,7 +6,7 @@ function Sidebar() {
       <div className='flex items-center gap-4 border-b border-b-slate-700 px-4 py-3.5'>
         <img
           className='h-11 w-11 rounded-full bg-slate-700 object-cover'
-          src='avatar.svg'
+          src='/avatar.svg'
           alt='avatar'
         />
         <div>

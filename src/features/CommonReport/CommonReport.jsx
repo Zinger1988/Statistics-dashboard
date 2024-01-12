@@ -1,44 +1,38 @@
-import { useEffect } from 'react';
+import { ResponsiveLine } from '@nivo/line';
 
-import { Box, GaugeChart, Legend, LineChart } from '../../ui';
-import CommonReportFilters from './CommonReportFilters';
+import CommonReportFilter from './CommonReportFilter';
+import { Box, GaugeChart, Legend } from '../../ui';
+import { calcLineChartSettings } from '../../utils/lineChartSettings';
 
-import { incomeDynamicsMock as pageData } from './IncomeDynamicsMock';
-import { useHeader } from '../../context/HeaderContext';
-
-function CommonReport() {
-  const { setHeader, setSubHeader } = useHeader();
-
-  const headerData = pageData.find((item) => item.type === 'header');
-  const incomeDynamics = pageData.find((item) => item.id === 'graph-1');
-  const completeDynamics = pageData.find((item) => item.id === 'graph-2');
-  const monthShipments = pageData.filter((item) => item.id.includes('scalar'));
-  const filters = pageData.filter((item) => item.type === 'select');
+function CommonReport({ report }) {
+  const { filters, data } = report;
+  const incomeDynamics = data.find((item) => item.id === 'graph-1');
+  const completeDynamics = data.find((item) => item.id === 'graph-2');
+  const monthShipments = data.filter((item) => item.id.includes('scalar'));
 
   const getLegend = (chartData) =>
     chartData.map(({ id, color }) => ({ id, color }));
 
-  useEffect(() => {
-    setHeader(headerData.title);
-    setSubHeader(headerData.subtitle);
-  }, [setHeader, setSubHeader, headerData.title, headerData.subtitle]);
-
   return (
     <div className='grid grid-cols-12 items-start gap-5'>
       <div className='col-span-9'>
-        <CommonReportFilters filters={filters} />
+        <CommonReportFilter filters={filters} />
       </div>
       <Box className='col-span-9' label={incomeDynamics.title}>
         <Legend data={getLegend(incomeDynamics.lines)} className='mb-3' />
-        <LineChart className='h-96' data={incomeDynamics} />
+        <div className='h-96'>
+          <ResponsiveLine {...calcLineChartSettings(incomeDynamics)} />
+        </div>
       </Box>
       <Box className='col-span-9' label={completeDynamics.title}>
         <Legend data={getLegend(completeDynamics.lines)} className='mb-3' />
-        <LineChart className='h-60' data={completeDynamics} />
+        <div className='h-64'>
+          <ResponsiveLine {...calcLineChartSettings(completeDynamics)} />
+        </div>
       </Box>
       <Box
         className='col-span-3 col-start-10 row-span-3 row-start-1'
-        label='Відванатження за поточний місяць'
+        label='Отгрузки за текущий месяц'
       >
         {monthShipments.map((data) => (
           <GaugeChart

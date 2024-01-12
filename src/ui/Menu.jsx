@@ -67,26 +67,60 @@ const data = [
   },
 ];
 
+const linkMap = {
+  5: '/engineers',
+  10: '/',
+};
+
 function Menu({ className = '', ...props }) {
   const renderMenu = (menu, menuLevel = 0) => {
     const sortedMenu = [...menu].sort((a, b) => (a.title > b.title ? 1 : -1));
 
+    let sublistGroupClass;
+    let listItemGroupClass;
+
+    switch (menuLevel) {
+      case 1:
+        sublistGroupClass = 'group-hover/item1:block';
+        listItemGroupClass =
+          'group-hover/item1:cursor-pointer group-hover/item1:border-l-blue-500 group-hover/item1:bg-slate-700';
+        break;
+      case 2:
+        sublistGroupClass = 'group-hover/item2:block';
+        listItemGroupClass =
+          'group-hover/item2:cursor-pointer group-hover/item2:border-l-blue-500 group-hover/item2:bg-slate-700';
+        break;
+      case 3:
+        sublistGroupClass = 'group-hover/item3:block';
+        listItemGroupClass =
+          'group-hover/item3:cursor-pointer group-hover/item3:border-l-blue-500 group-hover/item3:bg-slate-700';
+        break;
+      default:
+        sublistGroupClass = 'group-hover/item0:block';
+        listItemGroupClass =
+          'group-hover/item0:cursor-pointer group-hover/item0:border-l-blue-500 group-hover/item0:bg-slate-700';
+    }
+
     const listItem = sortedMenu.map((item) => {
-      const hasChilds = item.childs.length > 0;
+      const { title, subtitle, code, childs } = item;
+      const hasChilds = childs.length > 0;
+      const link = linkMap[code] ? { to: linkMap[code] } : {};
 
       return (
-        <li key={item.code} className={`group/item${menuLevel}`}>
+        <li key={code} className={`group/item${menuLevel}`}>
           <MenuItem
             menuLevel={menuLevel}
-            title={item.title}
-            subtitle={item.subtitle}
+            title={title}
+            subtitle={subtitle}
             hasChilds={hasChilds}
+            className={listItemGroupClass}
+            {...link}
           />
-          {hasChilds > 0 && (
+          {hasChilds && (
             <ul
-              className={`absolute left-full top-0 hidden h-full w-80 border-l border-r border-slate-700 bg-slate-800 py-4 group-hover/item${menuLevel}:block`}
+              className={`absolute left-full top-0 hidden h-full w-80 border-l border-r border-slate-700 bg-slate-800 py-4 ${sublistGroupClass}`}
             >
-              {renderMenu(item.childs, menuLevel + 1)}
+              {renderMenu(childs, menuLevel + 1)}
             </ul>
           )}
         </li>

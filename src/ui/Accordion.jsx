@@ -68,7 +68,7 @@ function AccordionBody({ children, accordionId, className, ...props }) {
 function useAccordion() {
   const context = useContext(AccordionContext);
   if (context === undefined) {
-    throw new Error('HeaderContext was used outside of AccordionProvider');
+    throw new Error('AccordionContext was used outside of AccordionProvider');
   }
   return context;
 }
