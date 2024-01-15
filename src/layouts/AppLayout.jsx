@@ -4,7 +4,7 @@ import { Header, Sidebar, BreadCrumbs } from '../ui';
 
 function AppLayout() {
   return (
-    <div className='flex min-h-screen flex-col overflow-x-hidden bg-slate-900 pl-80 text-white'>
+    <div className='flex min-h-screen flex-col overflow-x-hidden bg-slate-900 pl-72 text-white'>
       <Header />
       <Sidebar />
       <main className='flex flex-grow flex-col p-6'>

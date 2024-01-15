@@ -69,6 +69,7 @@ const data = [
 
 const linkMap = {
   5: '/engineers',
+  9: '/incomeDynamics',
   10: '/',
 };
 

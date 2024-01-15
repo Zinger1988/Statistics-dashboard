@@ -4,7 +4,8 @@ export async function getAllEngineers() {
   return data;
 }
 
-export async function getEngineer() {
+export async function getEngineer(id) {
+  console.log(id);
   const data = await fetch('/singleEngineerMock.json').then((res) =>
     res.json(),
   );

@@ -2,7 +2,7 @@ import { useForm, Controller } from 'react-hook-form';
 
 import { Accordion, Button, Icon, Select } from '../../ui';
 
-function CommonReportFilter({ filters }) {
+function IncomeDynamicsFilter({ filters }) {
   const defaultValues = filters.reduce((acc, cur) => {
     const value = Array.isArray(cur.value)
       ? cur.options.filter((opt) => cur.value.includes(opt.value))
@@ -64,4 +64,4 @@ function CommonReportFilter({ filters }) {
   );
 }
 
-export default CommonReportFilter;
+export default IncomeDynamicsFilter;

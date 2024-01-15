@@ -2,7 +2,14 @@ import ReactSelect from 'react-select';
 
 import Icon from './Icon';
 
-function Select({ value, options, isMulti, defaultValue, onChange }) {
+function Select({
+  value,
+  options,
+  isMulti,
+  defaultValue,
+  onChange,
+  placeholder = 'Выбрать',
+}) {
   const customClearIndicator = ({ clearValue }) => (
     <div className='group/wrapper cursor-pointer px-1'>
       <Icon
@@ -65,6 +72,7 @@ function Select({ value, options, isMulti, defaultValue, onChange }) {
       options={options}
       value={value}
       defaultValue={defaultValue}
+      placeholder={placeholder}
     />
   );
 }
