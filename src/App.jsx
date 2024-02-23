@@ -10,7 +10,7 @@ import { HeaderProvider } from './context/HeaderContext';
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 0,
+      staleTime: 1000 * 60 * 60 * 24,
     },
   },
 });
@@ -18,6 +18,7 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
+      <ReactQueryDevtools initialIsOpen={false} />
       <HeaderProvider>
         <Routes>
           <Route element={<AppLayout />}>

@@ -2,7 +2,7 @@ import { useForm, Controller } from 'react-hook-form';
 
 import { Accordion, Button, Icon, Select } from '../../ui';
 
-function CommonReportFilter({ filters }) {
+function CommonReportFilter({ filters, onFilterSubmit, isEditing }) {
   const defaultValues = filters.reduce((acc, cur) => {
     const value = Array.isArray(cur.value)
       ? cur.options.filter((opt) => cur.value.includes(opt.value))
@@ -18,7 +18,11 @@ function CommonReportFilter({ filters }) {
     defaultValues,
   });
 
-  const onSubmit = (data) => console.log(data);
+  const onSubmit = (filterData) => {
+    onFilterSubmit(filterData);
+  };
+
+  const handleReset = () => reset();
 
   return (
     <Accordion active='filter'>
@@ -53,8 +57,8 @@ function CommonReportFilter({ filters }) {
             ))}
           </div>
           <div className='flex flex-wrap gap-2'>
-            <Button>Применить</Button>
-            <Button appearance='outline' onClick={reset}>
+            <Button disabled={isEditing}>Применить</Button>
+            <Button type='button' appearance='outline' onClick={handleReset}>
               Сбросить
             </Button>
           </div>

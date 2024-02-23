@@ -107,6 +107,7 @@ export const calcLineChartSettings = (data) => {
     },
     axisLeft: {
       ...defaultSettings.axisLeft,
+      tickValues: 6,
       legend: data.yAxisLabel,
     },
     defs: data.lines.map((item, index) => {
