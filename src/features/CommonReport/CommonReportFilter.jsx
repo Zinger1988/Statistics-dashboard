@@ -1,9 +1,10 @@
 import { useForm, Controller } from 'react-hook-form';
 
 import { Accordion, Button, Icon, Select } from '../../ui';
+import { useSearchParams } from 'react-router-dom';
 
 function CommonReportFilter({ filters, onFilterSubmit, isEditing }) {
-  const defaultValues = filters.reduce((acc, cur) => {
+  const initialValues = filters.reduce((acc, cur) => {
     const value = Array.isArray(cur.value)
       ? cur.options.filter((opt) => cur.value.includes(opt.value))
       : cur.options.find((opt) => cur.value === opt.value);
@@ -14,15 +15,32 @@ function CommonReportFilter({ filters, onFilterSubmit, isEditing }) {
     };
   }, {});
 
+  const [searchParams, setSearchParams] = useSearchParams();
   const { control, handleSubmit, reset } = useForm({
-    defaultValues,
+    defaultValues: initialValues,
   });
 
   const onSubmit = (filterData) => {
+    for (const key of Object.keys(searchParams)) {
+      searchParams.delete(key);
+    }
+
+    searchParams.set('producers', filterData.producers.value);
+    searchParams.set(
+      'classifiers',
+      filterData.classifiers.map((item) => item.value),
+    );
+
+    setSearchParams(searchParams);
+
     onFilterSubmit(filterData);
   };
 
-  const handleReset = () => reset();
+  const handleReset = () => {
+    setSearchParams([]);
+    reset();
+    onFilterSubmit();
+  };
 
   return (
     <Accordion active='filter'>
@@ -48,7 +66,7 @@ function CommonReportFilter({ filters, onFilterSubmit, isEditing }) {
                       options={filter.options}
                       onChange={(value) => onChange(value)}
                       value={value}
-                      defaultValue={defaultValues[filter.id]}
+                      defaultValue={initialValues[filter.id]}
                       placeholder={filter.title}
                     />
                   );
