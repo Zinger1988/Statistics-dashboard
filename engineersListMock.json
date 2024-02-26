@@ -1,0 +1,289 @@
+{
+  "pageMeta": {
+    "id": "engineersList",
+    "type": "header",
+    "title": "Инженеры",
+    "subtitle": ""
+  },
+  "data": [
+    {
+      "id": "1234",
+      "name": "Роман Мирончук",
+      "stats": [
+        {
+          "label": "В работе",
+          "value": 56
+        },
+        {
+          "label": "Активных",
+          "value": 8
+        },
+        {
+          "label": "В ожидании",
+          "value": 25
+        },
+        {
+          "label": "Закрыто за месяц",
+          "value": 238
+        },
+        {
+          "label": "Закрыто за день",
+          "value": 10
+        },
+        {
+          "label": "Бонус",
+          "value": null
+        }
+      ],
+      "chart": {
+        "id": "graph-1",
+        "type": "barchart",
+        "title": "",
+        "subtitle": "",
+        "lines": [
+          {
+            "label": "Неактивные",
+            "data": [
+              {
+                "subLabel": "Выдано до получения ЗИП",
+                "value": 1,
+                "color": "#49F4C1"
+              },
+              {
+                "subLabel": "Получение ЗИП",
+                "value": 2,
+                "color": "#07A3A3"
+              },
+              {
+                "subLabel": "Ожидание ЗИП",
+                "value": 24,
+                "color": "#FA7EC8"
+              },
+              {
+                "subLabel": "Согласование",
+                "value": 2,
+                "color": "#FC6767"
+              }
+            ]
+          },
+          {
+            "label": "Активные",
+            "data": [
+              {
+                "subLabel": "Ремонт",
+                "value": 18,
+                "color": "#8FF86A"
+              },
+              {
+                "subLabel": "Ожидание в ремонте",
+                "value": 2,
+                "color": "#9279F8"
+              },
+              {
+                "subLabel": "Выполнение НУР",
+                "value": 1,
+                "color": "#F9D144"
+              },
+              {
+                "subLabel": "Разрешение на выдачу",
+                "value": 1,
+                "color": "#3F90DB"
+              },
+              {
+                "subLabel": "Диагностика",
+                "value": 10,
+                "color": "#AA945A"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "5678",
+      "name": "Дмитрий Колесник",
+      "stats": [
+        {
+          "label": "В работе",
+          "value": 19
+        },
+        {
+          "label": "Активных",
+          "value": 8
+        },
+        {
+          "label": "В ожидании",
+          "value": 11
+        },
+        {
+          "label": "Закрыто за месяц",
+          "value": 36
+        },
+        {
+          "label": "Закрыто за день",
+          "value": 0
+        },
+        {
+          "label": "Бонус",
+          "value": null
+        }
+      ],
+      "chart": {
+        "id": "graph-2",
+        "type": "barchart",
+        "title": "",
+        "subtitle": "",
+        "lines": [
+          {
+            "label": "Неактивные",
+            "data": [
+              {
+                "subLabel": "Выдано до получения ЗИП",
+                "value": 2,
+                "color": "#49F4C1"
+              },
+              {
+                "subLabel": "Получение ЗИП",
+                "value": 1,
+                "color": "#07A3A3"
+              },
+              {
+                "subLabel": "Ожидание ЗИП",
+                "value": 5,
+                "color": "#FA7EC8"
+              },
+              {
+                "subLabel": "Согласование",
+                "value": 2,
+                "color": "#FC6767"
+              }
+            ]
+          },
+          {
+            "label": "Активные",
+            "data": [
+              {
+                "subLabel": "Ремонт",
+                "value": 5,
+                "color": "#8FF86A"
+              },
+              {
+                "subLabel": "Ожидание в ремонте",
+                "value": 1,
+                "color": "#9279F8"
+              },
+              {
+                "subLabel": "Выполнение НУР",
+                "value": 0,
+                "color": "#F9D144"
+              },
+              {
+                "subLabel": "Разрешение на выдачу",
+                "value": 0,
+                "color": "#3F90DB"
+              },
+              {
+                "subLabel": "Диагностика",
+                "value": 3,
+                "color": "#AA945A"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "id": "9101",
+      "name": "Николай Прокопенко",
+      "stats": [
+        {
+          "label": "В работе",
+          "value": 33
+        },
+        {
+          "label": "Активных",
+          "value": 11
+        },
+        {
+          "label": "В ожидании",
+          "value": 22
+        },
+        {
+          "label": "Закрыто за месяц",
+          "value": 125
+        },
+        {
+          "label": "Закрыто за день",
+          "value": 4
+        },
+        {
+          "label": "Бонус",
+          "value": null
+        }
+      ],
+      "chart": {
+        "id": "graph-3",
+        "type": "barchart",
+        "title": "",
+        "subtitle": "",
+        "lines": [
+          {
+            "label": "Неактивные",
+            "data": [
+              {
+                "subLabel": "Выдано до получения ЗИП",
+                "value": 0,
+                "color": "#49F4C1"
+              },
+              {
+                "subLabel": "Получение ЗИП",
+                "value": 0,
+                "color": "#07A3A3"
+              },
+              {
+                "subLabel": "Ожидание ЗИП",
+                "value": 24,
+                "color": "#FA7EC8"
+              },
+              {
+                "subLabel": "Согласование",
+                "value": 0,
+                "color": "#FC6767"
+              }
+            ]
+          },
+          {
+            "label": "Активные",
+            "data": [
+              {
+                "subLabel": "Ремонт",
+                "value": 7,
+                "color": "#8FF86A"
+              },
+              {
+                "subLabel": "Ожидание в ремонте",
+                "value": 3,
+                "color": "#9279F8"
+              },
+              {
+                "subLabel": "Выполнение НУР",
+                "value": 0,
+                "color": "#F9D144"
+              },
+              {
+                "subLabel": "Разрешение на выдачу",
+                "value": 0,
+                "color": "#3F90DB"
+              },
+              {
+                "subLabel": "Диагностика",
+                "value": 1,
+                "color": "#AA945A"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  ]
+}
