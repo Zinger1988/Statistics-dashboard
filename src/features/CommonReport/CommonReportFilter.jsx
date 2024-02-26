@@ -3,7 +3,7 @@ import { useForm, Controller } from 'react-hook-form';
 import { Accordion, Button, Icon, Select } from '../../ui';
 import { useSearchParams } from 'react-router-dom';
 
-function CommonReportFilter({ filters, onFilterSubmit, isEditing }) {
+function CommonReportFilter({ filters, isLoading }) {
   const initialValues = filters.reduce((acc, cur) => {
     const value = Array.isArray(cur.value)
       ? cur.options.filter((opt) => cur.value.includes(opt.value))
@@ -21,25 +21,28 @@ function CommonReportFilter({ filters, onFilterSubmit, isEditing }) {
   });
 
   const onSubmit = (filterData) => {
+    const { producers, classifiers } = filterData;
+
     for (const key of Object.keys(searchParams)) {
       searchParams.delete(key);
     }
 
-    searchParams.set('producers', filterData.producers.value);
+    searchParams.set('producers', producers.value);
     searchParams.set(
       'classifiers',
-      filterData.classifiers.map((item) => item.value),
+      classifiers.map((item) => item.value),
     );
 
     setSearchParams(searchParams);
-
-    onFilterSubmit(filterData);
   };
 
   const handleReset = () => {
     setSearchParams([]);
-    reset();
-    onFilterSubmit();
+
+    reset({
+      classifiers: [],
+      producers: { value: '0', label: 'Усі виробники' },
+    });
   };
 
   return (
@@ -75,8 +78,13 @@ function CommonReportFilter({ filters, onFilterSubmit, isEditing }) {
             ))}
           </div>
           <div className='flex flex-wrap gap-2'>
-            <Button disabled={isEditing}>Применить</Button>
-            <Button type='button' appearance='outline' onClick={handleReset}>
+            <Button disabled={isLoading}>Применить</Button>
+            <Button
+              disabled={isLoading}
+              type='button'
+              appearance='outline'
+              onClick={handleReset}
+            >
               Сбросить
             </Button>
           </div>

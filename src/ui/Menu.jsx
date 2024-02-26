@@ -1,3 +1,4 @@
+import { useMenu } from '../layouts/useMenu';
 import MenuItem from './MenuItem';
 
 const data = [
@@ -7,60 +8,60 @@ const data = [
     code: '1',
     type: 'dir',
     childs: [
+      // {
+      //   title: 'Детализация по флагам',
+      //   subtitle: 'Предоставляет детализацию',
+      //   code: '2',
+      //   type: 'rep',
+      //   childs: [],
+      // },
+      // {
+      //   title: 'Долги по возврату запчастей',
+      //   subtitle: 'Предоставляет детализацию',
+      //   code: '3',
+      //   type: 'rep',
+      //   childs: [],
+      // },
+      // {
+      //   title: 'Индивидуальный отчет инженера',
+      //   subtitle: 'Предоставляет детализацию',
+      //   code: '4',
+      //   type: 'rep',
+      //   childs: [],
+      // },
       {
-        title: 'Детализация по флагам',
-        subtitle: 'Предоставляет детализацию',
-        code: '2',
-        type: 'rep',
-        childs: [],
-      },
-      {
-        title: 'Долги по возврату запчастей',
-        subtitle: 'Предоставляет детализацию',
-        code: '3',
-        type: 'rep',
-        childs: [],
-      },
-      {
-        title: 'Индивидуальный отчет инженера',
-        subtitle: 'Предоставляет детализацию',
-        code: '4',
-        type: 'rep',
-        childs: [],
-      },
-      {
-        title: 'Инженеры',
-        subtitle: 'Предоставляет детализацию',
+        title: 'Інженери',
+        subtitle: 'Надає деталізацію',
         code: '5',
         type: 'rep',
         childs: [],
       },
-      {
-        title: 'Ожидаемые поступления',
-        subtitle: 'Предоставляет детализацию',
-        code: '6',
-        type: 'rep',
-        childs: [],
-      },
-      {
-        title: 'Параметры работы',
-        subtitle: 'Предоставляет детализацию',
-        code: '7',
-        type: 'rep',
-        childs: [],
-      },
+      // {
+      //   title: 'Ожидаемые поступления',
+      //   subtitle: 'Предоставляет детализацию',
+      //   code: '6',
+      //   type: 'rep',
+      //   childs: [],
+      // },
+      // {
+      //   title: 'Параметры работы',
+      //   subtitle: 'Предоставляет детализацию',
+      //   code: '7',
+      //   type: 'rep',
+      //   childs: [],
+      // },
     ],
   },
   {
-    title: 'Динамика обращений', //  ноутбуки, планшеты
-    subtitle: 'Отчеты по устройствам Lenovo',
+    title: 'Динаміка звернень', //  ноутбуки, планшеты
+    subtitle: 'Звіти по пристроям Lenovo',
     code: '9',
     type: 'rep',
     childs: [],
   },
   {
-    title: 'Общий отчет',
-    subtitle: 'Отчеты по устройствам Lenovo',
+    title: 'Загальний звіт',
+    subtitle: 'Звіти по пристроям Lenovo',
     code: '10',
     type: 'rep',
     childs: [],
@@ -74,6 +75,14 @@ const linkMap = {
 };
 
 function Menu({ className = '', ...props }) {
+  // const { data, isLoading } = useMenu();
+
+  // if (!isLoading) {
+  //   console.log(data);
+  // } else {
+  //   return null;
+  // }
+
   const renderMenu = (menu, menuLevel = 0) => {
     const sortedMenu = [...menu].sort((a, b) => (a.title > b.title ? 1 : -1));
 

@@ -3,11 +3,9 @@ import { ResponsiveLine } from '@nivo/line';
 import CommonReportFilter from './CommonReportFilter';
 import { Box, GaugeChart, Legend, Loader } from '../../ui';
 
-import { useEditCommonReport } from './useEditCommonReport';
 import { calcLineChartSettings } from '../../utils/lineChartSettings';
 
-function CommonReport({ report }) {
-  const { editCommonReport, isEditing } = useEditCommonReport();
+function CommonReport({ report, isRefetching }) {
   const { filters, data } = report;
 
   const incomeDynamics = data.find((item) => item.id === 'graph-1');
@@ -20,18 +18,14 @@ function CommonReport({ report }) {
   return (
     <div className='grid grid-cols-12 items-start gap-5'>
       <div className='col-span-9'>
-        <CommonReportFilter
-          filters={filters}
-          isEditing={isEditing}
-          onFilterSubmit={editCommonReport}
-        />
+        <CommonReportFilter filters={filters} isLoading={isRefetching} />
       </div>
       <Box
         className='relative col-span-9 overflow-hidden'
         label={incomeDynamics.title}
       >
-        {isEditing && (
-          <Loader className='absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-slate-900/70' />
+        {isRefetching && (
+          <Loader className='absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-slate-950/70' />
         )}
         <Legend data={getLegend(incomeDynamics.lines)} className='mb-3' />
         <div className='h-96'>
@@ -42,8 +36,8 @@ function CommonReport({ report }) {
         className='relative col-span-9 overflow-hidden'
         label={completeDynamics.title}
       >
-        {isEditing && (
-          <Loader className='absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-slate-900/70' />
+        {isRefetching && (
+          <Loader className='absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-slate-950/70' />
         )}
         <Legend data={getLegend(completeDynamics.lines)} className='mb-3' />
         <div className='h-64'>

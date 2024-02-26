@@ -8,6 +8,7 @@ export default defineConfig({
   server: {
     proxy: {
       '/data': 'http://f1.programmers.com.ua',
+      '/menu': 'http://f1.programmers.com.ua',
     },
   },
 });
