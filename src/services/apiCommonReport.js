@@ -1,5 +1,5 @@
 export async function fetchCommonReport({ producers, classifiers, signal }) {
-  const response = await fetch('https://f1.programmers.com.ua/data', {
+  const response = await fetch('/data', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ producers, classifiers }),

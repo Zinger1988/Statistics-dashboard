@@ -5,10 +5,10 @@ import eslint from 'vite-plugin-eslint';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), eslint()],
-  // server: {
-  //   proxy: {
-  //     '/data': 'https://f1.programmers.com.ua',
-  //     '/menu': 'https://f1.programmers.com.ua',
-  //   },
-  // },
+  server: {
+    proxy: {
+      '/data': 'https://f1.programmers.com.ua',
+      '/menu': 'https://f1.programmers.com.ua',
+    },
+  },
 });
