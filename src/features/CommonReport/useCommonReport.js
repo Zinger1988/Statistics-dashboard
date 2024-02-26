@@ -17,11 +17,12 @@ export function useCommonReport() {
     ? classifiersParam.split(',').map((item) => ({ value: item }))
     : [];
 
-  const { isLoading, data, error, isRefetching } = useQuery({
+  const { isLoading, data, error, isError, isRefetching } = useQuery({
     queryKey: ['commonReport', producers, classifiers],
-    queryFn: () => fetchCommonReport({ producers, classifiers }),
+    queryFn: ({ signal }) =>
+      fetchCommonReport({ producers, classifiers, signal }),
     keepPreviousData: true,
   });
 
-  return { isLoading, data, error, isRefetching };
+  return { isLoading, data, isError, error, isRefetching };
 }

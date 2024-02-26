@@ -7,7 +7,7 @@ import { useHeader } from '../context/HeaderContext';
 import { useCommonReport } from '../features/CommonReport/useCommonReport';
 
 function Main() {
-  const { isLoading, data, isRefetching } = useCommonReport();
+  const { isLoading, data, isRefetching, isError, error } = useCommonReport();
   const { setHeader, setSubHeader } = useHeader();
 
   useEffect(() => {
@@ -19,6 +19,10 @@ function Main() {
 
   if (isLoading) {
     return <Loader className='flex grow items-center justify-center' />;
+  }
+
+  if (isError) {
+    return <h1>{error.message}</h1>;
   }
 
   return <CommonReport report={data} isRefetching={isRefetching} />;

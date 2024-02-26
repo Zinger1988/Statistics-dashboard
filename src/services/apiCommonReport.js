@@ -1,25 +1,16 @@
-// export async function getCommonReport() {
-//   const data = await fetch('/data').then((res) => res.json());
-
-//   return data;
-// }
-
-export async function fetchCommonReport(filterData) {
-  const data = await fetch('/data', {
+export async function fetchCommonReport({ producers, classifiers, signal }) {
+  const response = await fetch('https://f1.programmers.com.ua/data', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(filterData),
-  }).then((res) => res.json());
+    body: JSON.stringify({ producers, classifiers }),
+    signal: signal,
+  });
 
-  return data;
-}
+  if (!response.ok) {
+    throw new Error('An error occurred while fetching Common report data');
+  }
 
-export async function editCommonReport(filterData) {
-  const data = await fetch('/data', {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify(filterData),
-  }).then((res) => res.json());
+  const data = await response.json();
 
   return data;
 }
