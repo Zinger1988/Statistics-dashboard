@@ -1,5 +1,5 @@
 import { linearGradientDef } from '@nivo/core';
-import { hex2rgb } from './helpers';
+import { hex2rgb } from '../../utils/helpers';
 
 export const theme = {
   fontFamily: 'inherit',

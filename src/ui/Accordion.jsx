@@ -3,7 +3,7 @@ import Icon from './Icon';
 
 const AccordionContext = createContext();
 
-function Accordion({ children, onlyOne = true, active = '' }) {
+function Accordion({ children, onlyOne = true, active = '', className = '' }) {
   const [activeItems, setActiveItems] = useState([active]);
 
   const toggleActiveItems = (id) => {
@@ -22,7 +22,7 @@ function Accordion({ children, onlyOne = true, active = '' }) {
 
   return (
     <AccordionContext.Provider value={{ activeItems, toggleActiveItems }}>
-      {children}
+      <div className={className}>{children}</div>
     </AccordionContext.Provider>
   );
 }

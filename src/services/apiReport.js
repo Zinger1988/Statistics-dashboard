@@ -1,8 +1,8 @@
-export async function fetchCommonReport({ producers, classifiers, signal }) {
+export async function fetchReport({ signal, ...body }) {
   const response = await fetch('https://f1.programmers.com.ua/data', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ producers, classifiers }),
+    body: JSON.stringify(body),
     signal: signal,
   });
 

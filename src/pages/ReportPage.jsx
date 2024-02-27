@@ -1,13 +1,17 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-import CommonReport from '../features/CommonReport/CommonReport';
+import Report from '../features/Report/Report';
 import { Loader } from '../ui';
 
 import { useHeader } from '../context/HeaderContext';
-import { useCommonReport } from '../features/CommonReport/useCommonReport';
+import { useReport } from '../features/Report/useReport';
+import { useParams } from 'react-router';
 
-function Main() {
-  const { isLoading, data, isRefetching, isError, error } = useCommonReport();
+function ReportPage() {
+  const params = useParams();
+  const { isLoading, data, isRefetching, isError, error } = useReport(
+    params.reportId,
+  );
   const { setHeader, setSubHeader } = useHeader();
 
   useEffect(() => {
@@ -25,7 +29,7 @@ function Main() {
     return <h1>{error.message}</h1>;
   }
 
-  return <CommonReport report={data} isRefetching={isRefetching} />;
+  return <Report reportData={data} isRefetching={isRefetching} />;
 }
 
-export default Main;
+export default ReportPage;

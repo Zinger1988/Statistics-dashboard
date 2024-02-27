@@ -1,120 +1,41 @@
 import { useMenu } from '../layouts/useMenu';
 import MenuItem from './MenuItem';
 
-const data = [
-  {
-    title: 'Lenovo Depot',
-    subtitle: 'Отчеты по устройствам Lenovo',
-    code: '1',
-    type: 'dir',
-    childs: [
-      // {
-      //   title: 'Детализация по флагам',
-      //   subtitle: 'Предоставляет детализацию',
-      //   code: '2',
-      //   type: 'rep',
-      //   childs: [],
-      // },
-      // {
-      //   title: 'Долги по возврату запчастей',
-      //   subtitle: 'Предоставляет детализацию',
-      //   code: '3',
-      //   type: 'rep',
-      //   childs: [],
-      // },
-      // {
-      //   title: 'Индивидуальный отчет инженера',
-      //   subtitle: 'Предоставляет детализацию',
-      //   code: '4',
-      //   type: 'rep',
-      //   childs: [],
-      // },
-      {
-        title: 'Інженери',
-        subtitle: 'Надає деталізацію',
-        code: '5',
-        type: 'rep',
-        childs: [],
-      },
-      // {
-      //   title: 'Ожидаемые поступления',
-      //   subtitle: 'Предоставляет детализацию',
-      //   code: '6',
-      //   type: 'rep',
-      //   childs: [],
-      // },
-      // {
-      //   title: 'Параметры работы',
-      //   subtitle: 'Предоставляет детализацию',
-      //   code: '7',
-      //   type: 'rep',
-      //   childs: [],
-      // },
-    ],
-  },
-  {
-    title: 'Динаміка звернень', //  ноутбуки, планшеты
-    subtitle: 'Звіти по пристроям Lenovo',
-    code: '9',
-    type: 'rep',
-    childs: [],
-  },
-  {
-    title: 'Загальний звіт',
-    subtitle: 'Звіти по пристроям Lenovo',
-    code: '10',
-    type: 'rep',
-    childs: [],
-  },
-];
-
-const linkMap = {
-  5: '/engineers',
-  9: '/incomeDynamics',
-  10: '/',
-};
-
 function Menu({ className = '', ...props }) {
-  // const { data, isLoading } = useMenu();
-
-  // if (!isLoading) {
-  //   console.log(data);
-  // } else {
-  //   return null;
-  // }
+  const { data, isLoading, error } = useMenu();
 
   const renderMenu = (menu, menuLevel = 0) => {
     const sortedMenu = [...menu].sort((a, b) => (a.title > b.title ? 1 : -1));
 
-    let sublistGroupClass;
-    let listItemGroupClass;
+    let sublistCssClass;
+    let listItemCssClass;
 
     switch (menuLevel) {
       case 1:
-        sublistGroupClass = 'group-hover/item1:block';
-        listItemGroupClass =
+        sublistCssClass = 'group-hover/item1:block';
+        listItemCssClass =
           'group-hover/item1:cursor-pointer group-hover/item1:border-l-blue-500 group-hover/item1:bg-slate-700';
         break;
       case 2:
-        sublistGroupClass = 'group-hover/item2:block';
-        listItemGroupClass =
+        sublistCssClass = 'group-hover/item2:block';
+        listItemCssClass =
           'group-hover/item2:cursor-pointer group-hover/item2:border-l-blue-500 group-hover/item2:bg-slate-700';
         break;
       case 3:
-        sublistGroupClass = 'group-hover/item3:block';
-        listItemGroupClass =
+        sublistCssClass = 'group-hover/item3:block';
+        listItemCssClass =
           'group-hover/item3:cursor-pointer group-hover/item3:border-l-blue-500 group-hover/item3:bg-slate-700';
         break;
       default:
-        sublistGroupClass = 'group-hover/item0:block';
-        listItemGroupClass =
+        sublistCssClass = 'group-hover/item0:block';
+        listItemCssClass =
           'group-hover/item0:cursor-pointer group-hover/item0:border-l-blue-500 group-hover/item0:bg-slate-700';
     }
 
     const listItem = sortedMenu.map((item) => {
       const { title, subtitle, code, childs } = item;
       const hasChilds = childs.length > 0;
-      const link = linkMap[code] ? { to: linkMap[code] } : {};
+      const link = item.type === 'rep' ? { to: `reports/${code}` } : {};
 
       return (
         <li key={code} className={`group/item${menuLevel}`}>
@@ -123,12 +44,12 @@ function Menu({ className = '', ...props }) {
             title={title}
             subtitle={subtitle}
             hasChilds={hasChilds}
-            className={listItemGroupClass}
+            className={listItemCssClass}
             {...link}
           />
           {hasChilds && (
             <ul
-              className={`absolute left-full top-0 hidden h-full w-80 border-l border-r border-slate-700 bg-slate-800 py-4 ${sublistGroupClass}`}
+              className={`absolute left-full top-0 hidden h-full w-80 border-l border-r border-slate-700 bg-slate-800 py-4 ${sublistCssClass}`}
             >
               {renderMenu(childs, menuLevel + 1)}
             </ul>
@@ -141,9 +62,15 @@ function Menu({ className = '', ...props }) {
   };
 
   return (
-    <ul className={className} {...props}>
-      {renderMenu(data)}
-    </ul>
+    <>
+      {isLoading ? (
+        'loading'
+      ) : (
+        <ul className={className} {...props}>
+          {renderMenu(data)}
+        </ul>
+      )}
+    </>
   );
 }
 

@@ -1,6 +1,6 @@
 import { ResponsiveBar } from '@nivo/bar';
 import { Button, StatsTable } from '../../ui';
-import { calcBarChartSettings } from '../../utils/barChartSettings';
+import { calcBarChartSettings } from '../Report/barChartSettings';
 
 function EngineerInfo({
   name,

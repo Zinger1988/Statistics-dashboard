@@ -1,9 +1,9 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 
 import AppLayout from './layouts/AppLayout';
-import { Main, Engineers, SingleEngineer, IncomeDynamics } from './pages';
+import ReportPage from './pages/ReportPage';
 
 import { HeaderProvider } from './context/HeaderContext';
 
@@ -22,10 +22,11 @@ function App() {
       <HeaderProvider>
         <Routes>
           <Route element={<AppLayout />}>
-            <Route index element={<Main />} />
-            <Route path='/engineers' element={<Engineers />} />
-            <Route path='/engineers/:id' element={<SingleEngineer />} />
-            <Route path='/incomeDynamics' element={<IncomeDynamics />} />
+            <Route index element={<Navigate to='reports/5' replace />} />
+            <Route path='reports/:reportId' index element={<ReportPage />} />
+            {/* <Route path='reports/3' element={<IncomeDynamics />} /> */}
+            {/* <Route path='/engineers' element={<Engineers />} /> */}
+            {/* <Route path='/engineers/:id' element={<SingleEngineer />} /> */}
           </Route>
         </Routes>
       </HeaderProvider>

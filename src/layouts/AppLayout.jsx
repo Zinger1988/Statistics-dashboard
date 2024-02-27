@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router-dom';
 
-import { Header, Sidebar, BreadCrumbs } from '../ui';
+import { Header, Sidebar } from '../ui';
 
 function AppLayout() {
   return (
@@ -8,7 +8,6 @@ function AppLayout() {
       <Header />
       <Sidebar />
       <main className='flex flex-grow flex-col p-6'>
-        {/* <BreadCrumbs className='mb-4' /> */}
         <Outlet />
       </main>
     </div>
