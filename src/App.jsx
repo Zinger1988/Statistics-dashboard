@@ -23,7 +23,7 @@ function App() {
         <Routes>
           <Route element={<AppLayout />}>
             <Route index element={<Navigate to='reports/5' replace />} />
-            <Route path='reports/:reportId' index element={<ReportPage />} />
+            <Route path='reports/:reportId' element={<ReportPage />} />
             {/* <Route path='reports/3' element={<IncomeDynamics />} /> */}
             {/* <Route path='/engineers' element={<Engineers />} /> */}
             {/* <Route path='/engineers/:id' element={<SingleEngineer />} /> */}
