@@ -7,7 +7,9 @@ export const theme = {
   fontSize: 13,
   dots: {
     text: {
+      fontFamily: 'inherit',
       fill: '#ffffff',
+      fontSize: 12,
     },
   },
   axis: {
@@ -18,6 +20,7 @@ export const theme = {
     },
     legend: {
       text: {
+        fontFamily: 'inherit',
         fontSize: 14,
         fontWeight: 400,
         fill: '#ffffff',
@@ -28,6 +31,7 @@ export const theme = {
         stroke: '#ffffff',
       },
       text: {
+        fontFamily: 'inherit',
         fontSize: 12,
         fill: '#718085',
       },
@@ -91,16 +95,17 @@ export const defaultSettings = {
   enableSlices: 'x',
 };
 
-export const calcLineChartSettings = (data) => {
+export const calcLineChartSettings = (data, options = {}) => {
   const valuesY = data.lines.flatMap((d) => d.data.map((i) => i.y));
   const minY = 0;
   const maxY = Math.max(...valuesY);
 
   return {
     ...defaultSettings,
+    ...options,
+    data: data.lines,
     minY,
     maxY,
-    data: data.lines,
     axisBottom: {
       ...defaultSettings.axisBottom,
       legend: data.xAxisLabel,

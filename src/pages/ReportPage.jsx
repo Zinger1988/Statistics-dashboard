@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import Report from '../features/Report/Report';
 import { Loader } from '../ui';
@@ -13,6 +13,13 @@ function ReportPage() {
     params.reportId,
   );
   const { setHeader, setSubHeader } = useHeader();
+  const [reportId, setReportId] = useState(params.reportId);
+
+  useEffect(() => {
+    if (!isRefetching && !isLoading) {
+      setReportId(params.reportId);
+    }
+  }, [params.reportId, isRefetching, isLoading]);
 
   useEffect(() => {
     if (!isLoading && data) {
@@ -21,7 +28,7 @@ function ReportPage() {
     }
   }, [isLoading, data, setHeader, setSubHeader]);
 
-  if (isLoading) {
+  if (isLoading || params.reportId !== reportId) {
     return <Loader className='flex grow items-center justify-center' />;
   }
 

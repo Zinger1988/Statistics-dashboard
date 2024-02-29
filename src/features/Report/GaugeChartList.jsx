@@ -3,7 +3,7 @@ import { Box, GaugeChart } from '../../ui';
 function GaugeChartList({ data, isLoading, className = '' }) {
   const content =
     data.length > 0 ? (
-      <Box className={className} label='Отгрузки за текущий месяц'>
+      <Box className={className}>
         {data.map((data) => (
           <GaugeChart
             key={data.id}

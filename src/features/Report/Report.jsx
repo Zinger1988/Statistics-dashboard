@@ -1,7 +1,11 @@
 import LineChartList from './LineChartList';
 import GaugeChartList from './GaugeChartList';
+import PieChartList from './PieChartList';
 import Filter from './Filter';
 import { Accordion, Icon } from '../../ui';
+
+//TODO
+import { data as pieData } from './pieChartSettings';
 
 function Report({ reportData, isRefetching }) {
   const { filters, data } = reportData;
@@ -27,16 +31,16 @@ function Report({ reportData, isRefetching }) {
           />
         </Accordion.Body>
       </Accordion>
+
       <LineChartList
         data={lineCharts}
         isLoading={isRefetching}
         className='col-span-9'
       />
-      <GaugeChartList
-        data={gaugeCharts}
-        isLoading={isRefetching}
-        className='col-span-3 col-start-10 row-span-3 row-start-1'
-      />
+      <div className='col-span-3 col-start-10 row-span-3 row-start-1 grid gap-5'>
+        <PieChartList data={pieData} />
+        <GaugeChartList data={gaugeCharts} className='py-3' />
+      </div>
     </div>
   );
 }

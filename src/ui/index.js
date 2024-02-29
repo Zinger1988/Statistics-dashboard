@@ -6,7 +6,6 @@ export { default as GaugeChart } from './GaugeChart';
 export { default as Header } from './Header';
 export { default as Icon } from './Icon';
 export { default as Legend } from './Legend';
-export { default as LineChart } from './LineChart';
 export { default as Loader } from './Loader';
 export { default as Menu } from './Menu';
 export { default as MenuItem } from './MenuItem';
