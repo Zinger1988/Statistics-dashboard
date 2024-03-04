@@ -12,6 +12,7 @@ function Report({ reportData, isRefetching }) {
 
   const lineCharts = data.filter((item) => item.type === 'graph');
   const gaugeCharts = data.filter((item) => item.type === 'scalar');
+  const pieCharts = data.filter((item) => item.type === 'pieChart');
 
   return (
     <div className='grid grid-cols-12 items-start gap-5'>
@@ -38,7 +39,7 @@ function Report({ reportData, isRefetching }) {
         className='col-span-9'
       />
       <div className='col-span-3 col-start-10 row-span-3 row-start-1 grid gap-5'>
-        <PieChartList data={pieData} />
+        <PieChartList data={pieCharts} />
         <GaugeChartList data={gaugeCharts} className='py-3' />
       </div>
     </div>
