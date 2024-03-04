@@ -39,7 +39,7 @@ function Report({ reportData, isRefetching }) {
         className='col-span-9'
       />
       <div className='col-span-3 col-start-10 row-span-3 row-start-1 grid gap-5'>
-        <PieChartList data={pieCharts} />
+        <PieChartList data={pieCharts} isLoading={isRefetching} />
         <GaugeChartList data={gaugeCharts} className='py-3' />
       </div>
     </div>
