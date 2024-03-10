@@ -1,4 +1,4 @@
-import Icon from './Icon';
+import Icon from '../../ui/Icon';
 import { Link } from 'react-router-dom';
 
 function MenuItem({

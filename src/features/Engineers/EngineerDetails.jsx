@@ -1,12 +1,21 @@
-import { Box, GaugeChart, Table, Tabs, Icon } from '../../ui';
+import { Box, GaugeChart, Table, Tabs, Icon, Legend } from '../../ui';
 import EngineerInfo from './EngineerInfo';
 
 function EngineerDetails({ engineer }) {
   const { name, stats, chart, details, statsRelative } = engineer.data;
 
+  const getLegend = (data) => {
+    return data
+      .map(({ data }) =>
+        data.map(({ subLabel, color }) => ({ id: subLabel, color })),
+      )
+      .flat();
+  };
+
   return (
     <div className='grid grid-cols-1 items-start gap-5'>
       <Box label='Флаги сотрудника'>
+        <Legend data={getLegend(engineer.data.chart.lines)} className='mb-8' />
         <EngineerInfo
           name={name}
           stats={stats}

@@ -51,7 +51,7 @@ function Select({
       classNames={{
         menuList: () => 'bg-slate-900 py-2 rounded-md mt-1 text-sm',
         control: (state) =>
-          `text-white bg-slate-900 border border-slate-700 rounded-md hover:border-blue-500 hover:ring-[3px] hover:ring-blue-500/40 ${
+          `text-white bg-slate-900 border border-slate-600 rounded-md hover:border-blue-500 hover:ring-[3px] hover:ring-blue-500/40 ${
             state.isMulti ? 'pl-2' : 'pl-3'
           } pr-2 py-1`,
         singleValue: () => 'text-sm',

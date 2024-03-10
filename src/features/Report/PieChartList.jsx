@@ -18,15 +18,12 @@ function PieChartList({ data, isLoading, className = '' }) {
         )}
 
         {data.map((item) => (
-          <>
+          <div key={item.id}>
             <div className='mb-3 h-96'>
-              <ResponsivePie
-                key={item.id}
-                {...calcPieChartSettings(item.slices)}
-              />
+              <ResponsivePie {...calcPieChartSettings(item.slices)} />
             </div>
             <Legend data={getLegend(item.slices)} />
-          </>
+          </div>
         ))}
       </Box>
     ) : null;

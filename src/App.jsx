@@ -1,16 +1,20 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Routes, Route, Navigate } from 'react-router-dom';
+import { Navigate, BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import AppLayout from './layouts/AppLayout';
 import ReportPage from './pages/ReportPage';
+import EngineersListPage from './pages/EngineersListPage';
+import SingleEngineerPage from './pages/SingleEngineerPage';
 
 import { HeaderProvider } from './context/HeaderContext';
+import SignInPage from './pages/SignInPage';
+import { ProtectedRoute } from './ui';
 
 const queryClient = new QueryClient({
   defaultOptions: {
     queries: {
-      staleTime: 1000 * 60 * 60 * 24,
+      staleTime: 1000 * 60 * 5,
     },
   },
 });
@@ -20,15 +24,25 @@ function App() {
     <QueryClientProvider client={queryClient}>
       <ReactQueryDevtools initialIsOpen={false} />
       <HeaderProvider>
-        <Routes>
-          <Route element={<AppLayout />}>
-            <Route index element={<Navigate to='reports/5' replace />} />
-            <Route path='reports/:reportId' element={<ReportPage />} />
-            {/* <Route path='reports/3' element={<IncomeDynamics />} /> */}
-            {/* <Route path='/engineers' element={<Engineers />} /> */}
-            {/* <Route path='/engineers/:id' element={<SingleEngineer />} /> */}
-          </Route>
-        </Routes>
+        <BrowserRouter>
+          <Routes>
+            <Route
+              element={
+                <ProtectedRoute>
+                  <AppLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route index element={<Navigate to='reports/5' replace />} />
+              <Route path='reports/:reportId' element={<ReportPage />} />
+              <Route path='engineers'>
+                <Route index element={<EngineersListPage />} />
+                <Route path=':engineerId' element={<SingleEngineerPage />} />
+              </Route>
+            </Route>
+            <Route path='/signin' element={<SignInPage />} />
+          </Routes>
+        </BrowserRouter>
       </HeaderProvider>
     </QueryClientProvider>
   );

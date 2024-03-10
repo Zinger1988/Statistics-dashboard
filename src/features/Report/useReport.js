@@ -8,11 +8,12 @@ export function useReport(reportId) {
   const reportData = {};
 
   for (const key of searchParams) {
-    try {
-      reportData[key.at(0)] = JSON.parse(key.at(1));
-    } catch (e) {
-      reportData[key.at(0)] = null;
-    }
+    reportData[key.at(0)] = key.at(1).includes('_')
+      ? key
+          .at(1)
+          .split('_')
+          .map((item) => ({ value: item }))
+      : { value: key.at(1) };
   }
 
   const { isLoading, data, error, isError, isRefetching } = useQuery({

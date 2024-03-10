@@ -21,8 +21,8 @@ export const theme = {
     legend: {
       text: {
         fontFamily: 'inherit',
-        fontSize: 14,
-        fontWeight: 400,
+        fontSize: 13,
+        fontWeight: 500,
         fill: '#ffffff',
       },
     },

@@ -4,11 +4,11 @@ import { useParams } from 'react-router-dom';
 import { getEngineer } from '../../services/apiEngineers';
 
 export function useEngineerDetails() {
-  const { id } = useParams();
+  const { engineerId } = useParams();
 
   const { isLoading, data, error } = useQuery({
     queryKey: ['engineerDetails'],
-    queryFn: () => getEngineer(id),
+    queryFn: () => getEngineer(engineerId),
   });
 
   return { isLoading, data, error };

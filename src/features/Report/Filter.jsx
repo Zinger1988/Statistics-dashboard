@@ -21,12 +21,23 @@ function Filter({ data, isLoading }) {
   });
 
   function onSubmit(formData) {
-    for (const key of Object.keys(searchParams)) {
-      searchParams.delete(key);
-    }
-
     for (const key in formData) {
-      searchParams.set(key, JSON.stringify(formData[key]));
+      searchParams.delete(key);
+
+      let param = null;
+      const currentValue = formData[key];
+      const isArray = Array.isArray(currentValue);
+
+      if (isArray && currentValue.length !== 0) {
+        param = currentValue.map((item) => item.value).join('_');
+        param += '_';
+      }
+
+      if (currentValue.value) {
+        param = currentValue.value;
+      }
+
+      param && searchParams.set(key, param);
     }
 
     setSearchParams(searchParams);

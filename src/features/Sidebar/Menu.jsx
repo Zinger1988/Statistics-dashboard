@@ -1,8 +1,8 @@
-import { useMenu } from '../layouts/useMenu';
+import { useMenu } from '../../layouts/useMenu';
 import MenuItem from './MenuItem';
 
 function Menu({ className = '', ...props }) {
-  const { data, isLoading, error } = useMenu();
+  const { data: menuData, isLoading } = useMenu();
 
   const renderMenu = (menu, menuLevel = 0) => {
     const sortedMenu = [...menu].sort((a, b) => (a.title > b.title ? 1 : -1));
@@ -67,7 +67,7 @@ function Menu({ className = '', ...props }) {
         'loading'
       ) : (
         <ul className={className} {...props}>
-          {renderMenu(data)}
+          {renderMenu(menuData.data)}
         </ul>
       )}
     </>

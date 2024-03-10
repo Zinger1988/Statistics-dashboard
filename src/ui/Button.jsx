@@ -10,9 +10,11 @@ function Button({
 }) {
   const ButtonElement = props.to ? Link : 'button';
 
+  const baseCssClasses = 'inline-flex justify-center rounded-[4px]';
+
   const sizeMap = {
-    sm: 'inline-flex py-1 px-2.5 rounded-[4px] text-sm',
-    md: 'inline-flex py-2 px-4 rounded-[4px] text-sm',
+    sm: 'py-1 px-2.5 text-sm',
+    md: 'py-2 px-4 text-sm',
     lg: '',
   };
 
@@ -27,7 +29,7 @@ function Button({
 
   return (
     <ButtonElement
-      className={`${sizeMap[size]} ${
+      className={`${baseCssClasses} ${sizeMap[size]} ${
         disabled ? appearanceMap.disabled : appearanceMap[appearance]
       } ${className}`}
       {...props}

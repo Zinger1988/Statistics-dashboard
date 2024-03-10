@@ -4,7 +4,7 @@ import { fetchMenu } from '../services/apiLayout';
 export function useMenu() {
   const { data, isLoading, error } = useQuery({
     queryKey: ['menu'],
-    queryFn: fetchMenu,
+    queryFn: ({ signal }) => fetchMenu({ signal }),
     staleTime: 1000 * 60 * 5,
   });
 
