@@ -14,7 +14,6 @@ export function useLogin() {
     mutationFn: ({ login, password }) => loginApi({ login, password }),
     onSuccess: ({ status_code, refresh_token, access_token, ...user }) => {
       if (status_code === 200) {
-        debugger;
         localStorage.setItem('Access-Token', access_token);
         localStorage.setItem('Refresh-Token', refresh_token);
         queryClient.setQueryData(['user'], user);

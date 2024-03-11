@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { Navigate } from 'react-router-dom';
 
 import Report from '../features/Report/Report';
 import { Loader } from '../ui';
