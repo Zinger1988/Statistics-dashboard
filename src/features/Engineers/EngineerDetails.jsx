@@ -1,5 +1,5 @@
-import { Box, GaugeChart, Table, Tabs, Icon, Legend } from '../../ui';
 import EngineerInfo from './EngineerInfo';
+import { Box, GaugeChart, Table, Tabs, Icon, Legend } from '../../ui';
 
 function EngineerDetails({ engineer }) {
   const { name, stats, chart, details, statsRelative } = engineer.data;

@@ -1,5 +1,6 @@
-import { useUser } from '../Auth/useUser';
 import Menu from './Menu';
+
+import { useUser } from '../Auth/useUser';
 
 function Sidebar() {
   const { data } = useUser();

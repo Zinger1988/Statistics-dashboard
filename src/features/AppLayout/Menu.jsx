@@ -1,8 +1,18 @@
-import { useMenu } from '../../layouts/useMenu';
+import { InfoMessage, Loader } from '../../ui';
 import MenuItem from './MenuItem';
 
+import { useMenu } from './useMenu';
+
 function Menu({ className = '', ...props }) {
-  const { data: menuData, isLoading } = useMenu();
+  const { data: menuData, isLoading, isError, error } = useMenu();
+
+  if (!isLoading && (isError || menuData?.status !== 'success')) {
+    return (
+      <InfoMessage title={`Помилка ${error.cause}`} type='error' outlined>
+        Будь ласка, спробуйте ще раз трохи пізніше.
+      </InfoMessage>
+    );
+  }
 
   const renderMenu = (menu, menuLevel = 0) => {
     const sortedMenu = [...menu].sort((a, b) => (a.title > b.title ? 1 : -1));
@@ -64,7 +74,7 @@ function Menu({ className = '', ...props }) {
   return (
     <>
       {isLoading ? (
-        'loading'
+        <Loader className='flex justify-center' />
       ) : (
         <ul className={className} {...props}>
           {renderMenu(menuData.data)}

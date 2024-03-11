@@ -13,7 +13,9 @@ export async function fetchReport({ signal, ...body }) {
   });
 
   if (!response.ok) {
-    throw new Error('An error occurred while fetching data');
+    throw new Error('An errord occured during fetching data', {
+      cause: response.status,
+    });
   }
 
   const data = await response.json();

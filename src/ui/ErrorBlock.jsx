@@ -1,25 +1,30 @@
 import { useNavigate } from 'react-router-dom';
 import error404Img from '../assets/error404.svg';
 import error500Img from '../assets/error500.svg';
+import errorUnknown from '../assets/errorUnknown.svg';
 import Button from './Button';
 
-function ErrorBlock({ title, subTitle, statusCode = 404 }) {
+function ErrorBlock({ title, subTitle, statusCode = 404, className = '' }) {
   const navigate = useNavigate();
 
-  const statusImage = {
-    404: error404Img,
-    500: error500Img,
-  };
+  let statusImage = null;
+
+  switch (statusCode) {
+    case 404:
+      statusImage = error404Img;
+      break;
+    case 500:
+      statusImage = error500Img;
+      break;
+    default:
+      statusImage = errorUnknown;
+  }
 
   const handleNavigate = () => navigate(-1);
 
   return (
-    <section className='flex flex-col items-center text-white'>
-      <img
-        className=' mb-6 block w-96'
-        src={statusImage[statusCode]}
-        alt={title}
-      />
+    <section className={`flex flex-col items-center text-white ${className}`}>
+      <img className=' mb-6 block w-96' src={statusImage} alt={title} />
       <h1 className=' mb-5 text-4xl font-medium'>{title}</h1>
       {subTitle && <p className='mb-5 text-slate-400'>{subTitle}</p>}
 

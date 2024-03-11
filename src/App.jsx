@@ -6,9 +6,10 @@ import AppLayout from './layouts/AppLayout';
 import ReportPage from './pages/ReportPage';
 import EngineersListPage from './pages/EngineersListPage';
 import SingleEngineerPage from './pages/SingleEngineerPage';
+import NotFoundPage from './pages/NotFoundPage';
 
 import { HeaderProvider } from './context/HeaderContext';
-import SignInPage from './pages/SignInPage';
+import LoginPage from './pages/LoginPage';
 import { ProtectedRoute } from './ui';
 
 const queryClient = new QueryClient({
@@ -40,7 +41,8 @@ function App() {
                 <Route path=':engineerId' element={<SingleEngineerPage />} />
               </Route>
             </Route>
-            <Route path='/signin' element={<SignInPage />} />
+            <Route path='/login' element={<LoginPage />} />
+            <Route path='*' element={<NotFoundPage />} />
           </Routes>
         </BrowserRouter>
       </HeaderProvider>

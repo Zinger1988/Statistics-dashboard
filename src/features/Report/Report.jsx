@@ -4,9 +4,6 @@ import PieChartList from './PieChartList';
 import Filter from './Filter';
 import { Accordion, Icon } from '../../ui';
 
-//TODO
-import { data as pieData } from './pieChartSettings';
-
 function Report({ reportData, isRefetching }) {
   const { filters, data } = reportData;
 

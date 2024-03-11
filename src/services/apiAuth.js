@@ -1,4 +1,4 @@
-export async function signIn({ signal, ...body }) {
+export async function login({ signal, ...body }) {
   const response = await fetch('https://f1.programmers.com.ua/login', {
     method: 'POST',
     headers: {
@@ -9,7 +9,7 @@ export async function signIn({ signal, ...body }) {
   });
 
   if (!response.ok) {
-    throw new Error('An error occured during signin process');
+    throw new Error('An error occured during login process');
   }
 
   const data = await response.json();
@@ -29,7 +29,7 @@ export async function getCurrentUser({ signal }) {
   });
 
   if (!response.ok) {
-    throw new Error('An error occured during signin process');
+    throw new Error('An error occured fetching user');
   }
 
   const data = await response.json();
@@ -61,4 +61,28 @@ export async function refreshToken(signal, callbackFn) {
   localStorage.setItem('Access-Token', data.access_token);
 
   return callbackFn();
+}
+
+export async function signOut({ signal }) {
+  const token = localStorage.getItem('Access-Token');
+  const response = await fetch('https://f1.programmers.com.ua/logout', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json`',
+    },
+    body: JSON.stringify({ access_token: token }),
+    signal,
+  });
+
+  if (!response.ok) {
+    throw new Error('An error occured during signout process');
+  }
+
+  const data = await response.json();
+
+  if (data.status_code === 401) {
+    return await refreshToken(signal, () => signOut({ signal }));
+  } else {
+    return data;
+  }
 }

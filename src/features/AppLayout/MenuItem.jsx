@@ -1,5 +1,6 @@
-import Icon from '../../ui/Icon';
 import { Link } from 'react-router-dom';
+
+import Icon from '../../ui/Icon';
 
 function MenuItem({
   hasChilds,

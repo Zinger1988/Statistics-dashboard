@@ -4,7 +4,6 @@ export { default as BreadCrumbs } from './BreadCrumbs';
 export { default as Button } from './Button';
 export { default as FormRow } from './FormRow';
 export { default as GaugeChart } from './GaugeChart';
-export { default as Header } from './Header';
 export { default as Icon } from './Icon';
 export { default as Input } from './Input';
 export { default as InfoMessage } from './InfoMessage';

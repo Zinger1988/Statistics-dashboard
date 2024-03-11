@@ -1,22 +1,39 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
-import { FormRow, Input, Box, Button, Icon } from '../../ui';
-import { useSignIn } from './useSignIn';
+import { FormRow, Input, Box, Button, Icon, InfoMessage } from '../../ui';
 
-function SignInForm() {
-  const { signIn, isLoading, error } = useSignIn();
+import { useLogin } from './useLogin';
+
+function LoginForm() {
+  const { login, isLoading, error } = useLogin();
   const [showPassword, setShowPassword] = useState(false);
   const { handleSubmit, register, formState } = useForm();
   const { errors } = formState;
+  const [responseError, setResponseError] = useState();
 
   function onSubmit({ email, password }) {
-    signIn({ login: email, password });
+    login(
+      { login: email, password },
+      {
+        onSuccess: (res) => {
+          if (res?.status_code === 403) {
+            setResponseError({
+              description: 'Не вірний логін або пароль',
+            });
+          }
+        },
+      },
+    );
   }
 
   function handleToggleShowPassword() {
     setShowPassword((showPassword) => !showPassword);
   }
+
+  const handleErrorMessage = useCallback(() => {
+    setResponseError(null);
+  }, []);
 
   return (
     <Box label='Вхід до панелі звітів' className='w-96'>
@@ -30,12 +47,12 @@ function SignInForm() {
               required: 'Необхідно вказати e-mail',
               pattern: {
                 value: /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/,
-                message: 'Ведіть коректний e-mail',
+                message: 'Введіть коректний e-mail',
               },
             })}
           />
         </FormRow>
-        <FormRow error={errors?.password?.message} className='mb-6'>
+        <FormRow error={errors?.password?.message} className='mb-3'>
           <span className='relative block'>
             <Input
               type={showPassword ? 'text' : 'password'}
@@ -52,7 +69,17 @@ function SignInForm() {
             />
           </span>
         </FormRow>
-        <Button className='w-full' disabled={isLoading}>
+        {responseError && (
+          <InfoMessage
+            outlined
+            className='mb-2'
+            type='error'
+            onTimeout={handleErrorMessage}
+          >
+            {responseError.description}
+          </InfoMessage>
+        )}
+        <Button className='mt-3 w-full' disabled={isLoading}>
           Продовжити
         </Button>
       </form>
@@ -60,4 +87,4 @@ function SignInForm() {
   );
 }
 
-export default SignInForm;
+export default LoginForm;

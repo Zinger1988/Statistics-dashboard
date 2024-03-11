@@ -9,7 +9,9 @@ export async function fetchMenu({ signal }) {
   });
 
   if (!response.ok) {
-    throw new Error('Unable to fetch menu');
+    throw new Error('An errord occured during fetching menu data', {
+      cause: response.status,
+    });
   }
 
   const data = await response.json();

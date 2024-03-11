@@ -1,6 +1,7 @@
 import { useForm, Controller } from 'react-hook-form';
 
 import { Button, Select } from '../../ui';
+
 import { useSearchParams } from 'react-router-dom';
 
 function Filter({ data, isLoading }) {
