@@ -43,7 +43,7 @@ export function handleError(status) {
     }
   }
 
-  throw new MyError('An error occured during fetching report', {
+  throw new MyError(`An error occured: ${errorInfo.title}`, {
     status: status,
     ...errorInfo,
   });

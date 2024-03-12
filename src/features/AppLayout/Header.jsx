@@ -1,11 +1,11 @@
 import { Button } from '../../ui';
 
-import { useSignOut } from '../Auth/useSignOut';
+import { useLogout } from '../Auth/useLogout';
 import { useHeader } from '../../context/HeaderContext';
 
 function Header() {
   const { header, subHeader } = useHeader();
-  const { signOut, isLoading, error } = useSignOut();
+  const { signOut, isLoading, error } = useLogout();
 
   return (
     <header className='col-span-2 flex min-h-[73px] items-center justify-between border-b border-slate-700 bg-slate-800 px-6 py-3'>
