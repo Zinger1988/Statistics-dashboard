@@ -3,7 +3,7 @@ import { useUser } from '../features/Auth/useUser';
 import Loader from './Loader';
 
 function ProtectedRoute({ children }) {
-  const { data, isLoading } = useUser();
+  const { isLoading, isError } = useUser();
 
   if (isLoading) {
     return (
@@ -13,11 +13,7 @@ function ProtectedRoute({ children }) {
     );
   }
 
-  return data?.status === 'success' ? (
-    children
-  ) : (
-    <Navigate to='/login' replace />
-  );
+  return isError ? <Navigate to='/login' replace /> : children;
 }
 
 export default ProtectedRoute;

@@ -10,9 +10,7 @@ import ErrorBlock from '../ui/ErrorBlock';
 
 function ReportPage() {
   const params = useParams();
-  const { isLoading, data, error, isError, isRefetching } = useReport(
-    params.reportId,
-  );
+  const { isLoading, data, error, isRefetching } = useReport(params.reportId);
   const { setHeader, setSubHeader } = useHeader();
   const [reportId, setReportId] = useState(params.reportId);
 
@@ -23,7 +21,7 @@ function ReportPage() {
   }, [params.reportId, isRefetching, isLoading]);
 
   useEffect(() => {
-    if (!isLoading && !error && data.status !== 'error') {
+    if (!isLoading && !error) {
       setHeader(data.pageMeta.title);
       setSubHeader(data.pageMeta.subtitle);
     }
@@ -33,15 +31,15 @@ function ReportPage() {
     return <Loader className='flex grow items-center justify-center' />;
   }
 
-  if (!isLoading && (isError || data?.status !== 'success')) {
-    const statusCode = isError ? error.cause : data?.status_code;
+  if (error) {
+    const { status, title, description } = error.extraParams;
 
     return (
       <ErrorBlock
         className='flex-grow justify-center'
-        statusCode={statusCode}
-        title='Щось пішло не так...'
-        subTitle='Будь ласка, спробуйте ще раз трохи пізніше.'
+        statusCode={status}
+        title={title}
+        subTitle={description}
       />
     );
   }

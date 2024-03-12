@@ -6,9 +6,9 @@ import AuthLayout from '../layouts/AuthLayout';
 import { useUser } from '../features/Auth/useUser';
 
 function LoginPage() {
-  const { data } = useUser();
+  const { data, isError } = useUser();
 
-  if (data?.status === 'success') {
+  if (data && !isError) {
     return <Navigate to='/' replace />;
   }
 

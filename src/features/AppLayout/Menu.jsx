@@ -4,11 +4,12 @@ import MenuItem from './MenuItem';
 import { useMenu } from './useMenu';
 
 function Menu({ className = '', ...props }) {
-  const { data: menuData, isLoading, isError, error } = useMenu();
+  const { data: menuData, isLoading, error } = useMenu();
 
-  if (!isLoading && (isError || menuData?.status !== 'success')) {
+  if (error) {
+    const { status } = error.extraParams;
     return (
-      <InfoMessage title={`Помилка ${error.cause}`} type='error' outlined>
+      <InfoMessage title={`Помилка ${status}`} type='error' outlined>
         Будь ласка, спробуйте ще раз трохи пізніше.
       </InfoMessage>
     );

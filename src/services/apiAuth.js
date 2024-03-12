@@ -1,3 +1,5 @@
+import { handleError } from '../utils/helpers';
+
 export async function login({ signal, ...body }) {
   const response = await fetch('https://f1.programmers.com.ua/login', {
     method: 'POST',
@@ -9,12 +11,10 @@ export async function login({ signal, ...body }) {
   });
 
   if (!response.ok) {
-    throw new Error('An error occured during login process');
+    handleError(response.status);
+  } else {
+    return await response.json();
   }
-
-  const data = await response.json();
-
-  return data;
 }
 
 export async function getCurrentUser({ signal }) {
@@ -28,16 +28,14 @@ export async function getCurrentUser({ signal }) {
     signal,
   });
 
-  if (!response.ok) {
-    throw new Error('An error occured fetching user');
+  if (response.status === 401) {
+    return await refreshToken(signal, () => getCurrentUser({ signal }));
   }
 
-  const data = await response.json();
-
-  if (data.status_code === 401) {
-    return await refreshToken(signal, () => getCurrentUser({ signal }));
+  if (!response.ok) {
+    handleError(response.status);
   } else {
-    return data;
+    return await response.json();
   }
 }
 
@@ -53,7 +51,7 @@ export async function refreshToken(signal, callbackFn) {
   });
 
   if (!response.ok) {
-    throw new Error('An error occurred while refreshing token');
+    handleError(response.status);
   }
 
   const data = await response.json();
@@ -74,15 +72,13 @@ export async function signOut({ signal }) {
     signal,
   });
 
-  if (!response.ok) {
-    throw new Error('An error occured during signout process');
+  if (response.status === 401) {
+    return await refreshToken(signal, () => signOut({ signal }));
   }
 
-  const data = await response.json();
-
-  if (data.status_code === 401) {
-    return await refreshToken(signal, () => signOut({ signal }));
+  if (!response.ok) {
+    handleError(response.status);
   } else {
-    return data;
+    return await response.json();
   }
 }

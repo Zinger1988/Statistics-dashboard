@@ -1,3 +1,5 @@
+import { handleError } from '../utils/helpers';
+
 export async function fetchMenu({ signal }) {
   const token = localStorage.getItem('Access-Token');
   const response = await fetch('https://f1.programmers.com.ua/menu', {
@@ -8,17 +10,13 @@ export async function fetchMenu({ signal }) {
     signal,
   });
 
-  if (!response.ok) {
-    throw new Error('An errord occured during fetching menu data', {
-      cause: response.status,
-    });
+  if (response.status === 401) {
+    await fetchMenu(signal, () => fetchMenu());
   }
 
-  const data = await response.json();
-
-  if (data.status_code === 401) {
-    await fetchMenu(signal, () => fetchMenu());
+  if (!response.ok) {
+    handleError(response.status);
   } else {
-    return data;
+    return await response.json();
   }
 }

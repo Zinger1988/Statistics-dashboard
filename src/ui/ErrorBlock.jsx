@@ -20,7 +20,8 @@ function ErrorBlock({ title, subTitle, statusCode = 404, className = '' }) {
       statusImage = errorUnknown;
   }
 
-  const handleNavigate = () => navigate(-1);
+  const handleNavigate = () =>
+    navigate(-1, { replace: true, relative: 'path' });
 
   return (
     <section className={`flex flex-col items-center text-white ${className}`}>
@@ -29,7 +30,7 @@ function ErrorBlock({ title, subTitle, statusCode = 404, className = '' }) {
       {subTitle && <p className='mb-5 text-slate-400'>{subTitle}</p>}
 
       <div className='flex gap-2'>
-        <Button to='/' replace>
+        <Button to='/' replace relative='path'>
           На головну
         </Button>
         {statusCode === 404 && (

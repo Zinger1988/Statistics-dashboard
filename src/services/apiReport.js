@@ -1,4 +1,5 @@
 import { refreshToken } from './apiAuth';
+import { handleError } from '../utils/helpers';
 
 export async function fetchReport({ signal, ...body }) {
   const accessToken = localStorage.getItem('Access-Token');
@@ -12,18 +13,13 @@ export async function fetchReport({ signal, ...body }) {
     signal: signal,
   });
 
-  if (!response.ok) {
-    throw new Error('An errord occured during fetching data', {
-      cause: response.status,
-    });
+  if (response.status === 401) {
+    return await refreshToken(signal, () => fetchReport({ signal, ...body }));
   }
 
-  const data = await response.json();
-
-  if (data.status_code === 401) {
-    console.log('refresh report');
-    return await refreshToken(signal, () => fetchReport({ signal, ...body }));
+  if (!response.ok) {
+    handleError(response.status);
   } else {
-    return data;
+    return await response.json();
   }
 }

@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 
 import { FormRow, Input, Box, Button, Icon, InfoMessage } from '../../ui';
@@ -12,19 +12,16 @@ function LoginForm() {
   const { errors } = formState;
   const [responseError, setResponseError] = useState();
 
+  useEffect(() => {
+    if (error) {
+      setResponseError({
+        description: 'Не вірний логін або пароль',
+      });
+    }
+  }, [error]);
+
   function onSubmit({ email, password }) {
-    login(
-      { login: email, password },
-      {
-        onSuccess: (res) => {
-          if (res?.status_code === 403) {
-            setResponseError({
-              description: 'Не вірний логін або пароль',
-            });
-          }
-        },
-      },
-    );
+    login({ login: email, password });
   }
 
   function handleToggleShowPassword() {
