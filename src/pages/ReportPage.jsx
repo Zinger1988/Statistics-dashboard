@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
+import { Navigate } from 'react-router-dom';
 
 import Report from '../features/Report/Report';
 import { Loader } from '../ui';
@@ -7,8 +8,10 @@ import { Loader } from '../ui';
 import { useHeader } from '../context/HeaderContext';
 import { useReport } from '../features/Report/useReport';
 import ErrorBlock from '../ui/ErrorBlock';
+import { useQueryClient } from '@tanstack/react-query';
 
 function ReportPage() {
+  const queryClient = useQueryClient();
   const params = useParams();
   const { isLoading, data, error, isRefetching } = useReport(params.reportId);
   const { setHeader, setSubHeader } = useHeader();
@@ -33,6 +36,11 @@ function ReportPage() {
 
   if (error) {
     const { status, title, description } = error.extraParams;
+
+    if (status === 403) {
+      queryClient.setQueryData(['user'], null);
+      return <Navigate to='/login' />;
+    }
 
     return (
       <ErrorBlock

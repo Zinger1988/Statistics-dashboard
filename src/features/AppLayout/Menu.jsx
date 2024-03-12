@@ -1,13 +1,22 @@
+import { Navigate } from 'react-router-dom';
 import { InfoMessage, Loader } from '../../ui';
 import MenuItem from './MenuItem';
 
 import { useMenu } from './useMenu';
+import { useQueryClient } from '@tanstack/react-query';
 
 function Menu({ className = '', ...props }) {
+  const queryClient = useQueryClient();
   const { data: menuData, isLoading, error } = useMenu();
 
   if (error) {
     const { status } = error.extraParams;
+
+    if (status === 403) {
+      queryClient.setQueryData(['user'], null);
+      return <Navigate to='/login' />;
+    }
+
     return (
       <InfoMessage title={`Помилка ${status}`} type='error' outlined>
         Будь ласка, спробуйте ще раз трохи пізніше.
