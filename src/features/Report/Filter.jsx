@@ -80,14 +80,14 @@ function Filter({ data, isLoading }) {
         ))}
       </div>
       <div className='flex flex-wrap gap-2'>
-        <Button disabled={isLoading}>Применить</Button>
+        <Button disabled={isLoading}>Застосувати</Button>
         <Button
           disabled={isLoading}
           type='button'
           appearance='outline'
           onClick={handleReset}
         >
-          Сбросить
+          Скинути
         </Button>
       </div>
     </form>
