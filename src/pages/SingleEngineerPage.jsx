@@ -4,10 +4,10 @@ import EngineerDetails from '../features/Engineers/EngineerDetails';
 import { Loader } from '../ui';
 
 import { useHeader } from '../context/HeaderContext';
-import { useEngineerDetails } from '../features/Engineers/useEngineerDetails';
+import { useEngineer } from '../features/Engineers/useEngineer';
 
 function SingleEngineer() {
-  const { isLoading, data, error } = useEngineerDetails();
+  const { isLoading, data, error } = useEngineer(8);
   const { setHeader, setSubHeader } = useHeader();
 
   useEffect(() => {

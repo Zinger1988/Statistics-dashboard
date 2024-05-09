@@ -36,10 +36,8 @@ function App() {
             >
               <Route index element={<Navigate to='reports/5' replace />} />
               <Route path='reports/:reportId' element={<ReportPage />} />
-              <Route path='engineers'>
-                <Route index element={<EngineersListPage />} />
-                <Route path=':engineerId' element={<SingleEngineerPage />} />
-              </Route>
+              <Route path='engineers/7' element={<EngineersListPage />} />
+              <Route path='engineers/8' element={<SingleEngineerPage />} />
             </Route>
             <Route path='/login' element={<LoginPage />} />
             <Route path='*' element={<NotFoundPage />} />

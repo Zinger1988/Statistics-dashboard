@@ -4,10 +4,10 @@ import EngineersList from '../features/Engineers/EngineersList';
 import { Loader } from '../ui';
 
 import { useHeader } from '../context/HeaderContext';
-import { useEngineersList } from '../features/Engineers/useEngineersList';
+import { useEngineer } from '../features/Engineers/useEngineer';
 
 function Engineers() {
-  const { isLoading, data, error } = useEngineersList();
+  const { isLoading, data, error } = useEngineer(7);
   const { setHeader, setSubHeader } = useHeader();
 
   useEffect(() => {
