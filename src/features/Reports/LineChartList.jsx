@@ -3,7 +3,7 @@ import { ResponsiveLine } from '@nivo/line';
 import { Loader, Legend, Box } from '../../ui';
 
 import { getLegend } from './utils';
-import { calcLineChartSettings } from './lineChartSettings';
+import { calcLineChartSettings } from './utils';
 
 function LineChartList({ data, isLoading, className = '' }) {
   const cssClass = `relative overflow-hidden ${className}`;
@@ -14,7 +14,7 @@ function LineChartList({ data, isLoading, className = '' }) {
       )}
       <Legend data={getLegend(item.lines)} className='mb-3' />
       <div className='h-96'>
-          <ResponsiveLine {...calcLineChartSettings(item)} />
+        <ResponsiveLine {...calcLineChartSettings(item)} />
       </div>
     </Box>
   ));

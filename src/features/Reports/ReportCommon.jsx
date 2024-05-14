@@ -4,7 +4,7 @@ import PieChartList from './PieChartList';
 import Filter from './Filter';
 import { Accordion, Icon } from '../../ui';
 
-function Report({ reportData, isRefetching }) {
+function ReportCommon({ reportData, isRefetching }) {
   const { filters, data } = reportData;
 
   const lineCharts = data.filter((item) => item.type === 'graph');
@@ -43,4 +43,4 @@ function Report({ reportData, isRefetching }) {
   );
 }
 
-export default Report;
+export default ReportCommon;

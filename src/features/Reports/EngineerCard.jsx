@@ -1,10 +1,10 @@
 import { ResponsiveBar } from '@nivo/bar';
 
-import { Button, StatsTable } from '../../ui';
+import { StatsTable } from '../../ui';
 
-import { calcBarChartSettings } from './barChartSettings';
+import { calcBarChartSettings } from './utils';
 
-function EngineerInfo({
+function EngineerCard({
   name,
   stats,
   chartSettings,
@@ -28,4 +28,4 @@ function EngineerInfo({
   );
 }
 
-export default EngineerInfo;
+export default EngineerCard;

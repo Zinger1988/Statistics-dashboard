@@ -17,11 +17,16 @@ function GaugeChart({ data, className, ...props }) {
     return item.max >= data.value && item.min <= data.value;
   });
 
-  const statusIconsIdMap = [
+  let statusIconsIdMap = [
     'warning-triangle',
     'warning-circled',
     'check-circled',
   ];
+
+  //If order of values is descendant - reverse an icon
+  if (data.desc) {
+    statusIconsIdMap.reverse();
+  }
 
   return (
     <div

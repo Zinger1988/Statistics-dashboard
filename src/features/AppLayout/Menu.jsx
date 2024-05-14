@@ -55,7 +55,7 @@ function Menu({ className = '', ...props }) {
     const listItem = sortedMenu.map((item) => {
       const { title, subtitle, code, childs, layout, group } = item;
       const hasChilds = childs.length > 0;
-      const link = item.type === 'rep' ? { to: `${layout}/${code}` } : {};
+      const link = item.type === 'rep' ? { to: `reports/${code}` } : {};
 
       return (
         <li key={code} className={`group/item${menuLevel}`}>

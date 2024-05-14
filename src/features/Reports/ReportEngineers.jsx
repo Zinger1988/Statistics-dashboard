@@ -1,7 +1,7 @@
-import EngineerInfo from './EngineerInfo';
+import EngineerCard from './EngineerCard';
 import { Box, Legend } from '../../ui';
 
-function EngineersList({ list }) {
+function ReportEngineers({ list }) {
   const { data } = list;
 
   const getLegend = (data) => {
@@ -29,7 +29,7 @@ function EngineersList({ list }) {
     <Box label='Сотрудники - флаги'>
       <Legend data={getLegend(data[0].chart.lines)} className='mb-8' />
       {data.map(({ id, name, stats, chart }) => (
-        <EngineerInfo
+        <EngineerCard
           key={id}
           id={id}
           name={name}
@@ -43,4 +43,4 @@ function EngineersList({ list }) {
   );
 }
 
-export default EngineersList;
+export default ReportEngineers;

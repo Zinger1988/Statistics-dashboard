@@ -1,7 +1,7 @@
-import EngineerInfo from './EngineerInfo';
+import EngineerCard from './EngineerCard';
 import { Box, GaugeChart, Table, Tabs, Icon, Legend } from '../../ui';
 
-function EngineerDetails({ engineer }) {
+function ReportEngineer({ engineer }) {
   const { name, stats, chart, details, statsRelative } = engineer.data;
 
   const getLegend = (data) => {
@@ -11,12 +11,12 @@ function EngineerDetails({ engineer }) {
       )
       .flat();
   };
-  
+
   return (
     <div className='grid grid-cols-1 items-start gap-5'>
       <Box label='Флаги сотрудника'>
         <Legend data={getLegend(engineer.data.chart.lines)} className='mb-8' />
-        <EngineerInfo
+        <EngineerCard
           name={name}
           stats={stats}
           chartSettings={chart.lines}
@@ -28,7 +28,7 @@ function EngineerDetails({ engineer }) {
           ))}
         </div>
       </Box>
-      <Box label='Детализация по сотруднику и флагу'>
+      <Box label='Детализація по співробітнику і прапору'>
         <Tabs active={0}>
           <Tabs.TabsHead>
             {details.map((item, i) => (
@@ -82,4 +82,4 @@ function EngineerDetails({ engineer }) {
   );
 }
 
-export default EngineerDetails;
+export default ReportEngineer;

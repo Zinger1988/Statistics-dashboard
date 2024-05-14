@@ -3,7 +3,7 @@ import { ResponsivePie } from '@nivo/pie';
 import { Loader, Legend, Box } from '../../ui';
 
 import { getLegend } from './utils';
-import { calcPieChartSettings } from './pieChartSettings';
+import { calcPieChartSettings } from './utils';
 
 function PieChartList({ data, isLoading, className = '' }) {
   const cssClass = `relative overflow-hidden ${className}`;

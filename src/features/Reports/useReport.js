@@ -17,7 +17,7 @@ export function useReport(reportId) {
   }
 
   const { isLoading, data, error, isError, isRefetching } = useQuery({
-    queryKey: ['commonReport', reportData, reportId],
+    queryKey: ['reportCommon', reportData, reportId],
     keepPreviousData: true,
     queryFn: ({ signal }) =>
       fetchReport({ signal, ...reportData, code: reportId }),
