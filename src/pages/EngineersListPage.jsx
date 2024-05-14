@@ -5,6 +5,7 @@ import { Loader } from '../ui';
 
 import { useHeader } from '../context/HeaderContext';
 import { useEngineer } from '../features/Engineers/useEngineer';
+import ErrorBoundary from '../features/ErrorBoundaries/ErrorBoundary';
 
 function Engineers() {
   const { isLoading, data, error } = useEngineer(7);
@@ -21,7 +22,7 @@ function Engineers() {
     return <Loader className='flex grow items-center justify-center' />;
   }
 
-  return <EngineersList list={data} />;
+  return <ErrorBoundary><EngineersList list={data} /></ErrorBoundary>;
 }
 
 export default Engineers;

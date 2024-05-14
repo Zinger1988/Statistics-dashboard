@@ -4,7 +4,7 @@ import error500Img from '../assets/error500.svg';
 import errorUnknown from '../assets/errorUnknown.svg';
 import Button from './Button';
 
-function ErrorBlock({ title, subTitle, statusCode = 404, className = '' }) {
+function ErrorBlock({ title, subTitle, statusCode, className = '', hasControls = true }) {
   const navigate = useNavigate();
 
   let statusImage = null;
@@ -28,17 +28,19 @@ function ErrorBlock({ title, subTitle, statusCode = 404, className = '' }) {
       <img className=' mb-6 block w-96' src={statusImage} alt={title} />
       <h1 className=' mb-5 text-4xl font-medium'>{title}</h1>
       {subTitle && <p className='mb-5 text-slate-400'>{subTitle}</p>}
-
-      <div className='flex gap-2'>
-        <Button to='/' replace relative='path'>
-          На головну
-        </Button>
-        {statusCode === 404 && (
-          <Button onClick={handleNavigate} appearance='outline'>
-            Повернутись назад
+      { 
+        hasControls &&
+        <div className='flex gap-2'>
+          <Button to='/' replace relative='path'>
+            На головну
           </Button>
-        )}
-      </div>
+          {statusCode === 404 && (
+            <Button onClick={handleNavigate} appearance='outline'>
+              Повернутись назад
+            </Button>
+          )}
+        </div>
+      }
     </section>
   );
 }

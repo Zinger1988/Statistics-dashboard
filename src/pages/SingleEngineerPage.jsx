@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 
 import EngineerDetails from '../features/Engineers/EngineerDetails';
+import ErrorBoundary from '../features/ErrorBoundaries/ErrorBoundary';
 import { Loader } from '../ui';
 
 import { useHeader } from '../context/HeaderContext';
@@ -21,7 +22,7 @@ function SingleEngineer() {
     return <Loader className='flex grow items-center justify-center' />;
   }
 
-  return <EngineerDetails engineer={data} />;
+  return <ErrorBoundary><EngineerDetails engineer={data} /></ErrorBoundary>;
 }
 
 export default SingleEngineer;

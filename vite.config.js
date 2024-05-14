@@ -5,9 +5,4 @@ import eslint from 'vite-plugin-eslint';
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react(), eslint()],
-  server: {
-    proxy: {
-      '/test': 'https://b2b.cifrotech.ua/api/rest/store/ru/getstock',
-    },
-  },
 });

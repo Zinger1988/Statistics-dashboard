@@ -2,6 +2,7 @@ export { Accordion, useAccordion } from './Accordion';
 export { default as Box } from './Box';
 export { default as BreadCrumbs } from './BreadCrumbs';
 export { default as Button } from './Button';
+export { default as ErrorBlock } from './ErrorBlock';
 export { default as FormRow } from './FormRow';
 export { default as GaugeChart } from './GaugeChart';
 export { default as Icon } from './Icon';

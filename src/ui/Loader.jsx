@@ -1,4 +1,4 @@
-function Loader({ className }) {
+function Loader({ className, loaderText = 'Loading...' }) {
   return (
     <div role='status' className={`flex items-center gap-3 ${className}`}>
       <svg
@@ -18,7 +18,7 @@ function Loader({ className }) {
         />
       </svg>
       <span className='text-sm font-medium uppercase tracking-widest text-slate-400'>
-        Loading...
+        {loaderText}
       </span>
     </div>
   );

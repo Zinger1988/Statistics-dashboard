@@ -3,11 +3,11 @@ import { useParams } from 'react-router';
 import { Navigate } from 'react-router-dom';
 
 import Report from '../features/Report/Report';
-import { Loader } from '../ui';
+import ErrorBoundary from '../features/ErrorBoundaries/ErrorBoundary';
+import { Loader, ErrorBlock } from '../ui';
 
 import { useHeader } from '../context/HeaderContext';
 import { useReport } from '../features/Report/useReport';
-import ErrorBlock from '../ui/ErrorBlock';
 import { useQueryClient } from '@tanstack/react-query';
 
 function ReportPage() {
@@ -52,7 +52,7 @@ function ReportPage() {
     );
   }
 
-  return <Report reportData={data} isRefetching={isRefetching} />;
+  return <ErrorBoundary><Report reportData={data} isRefetching={isRefetching} /></ErrorBoundary>;
 }
 
 export default ReportPage;

@@ -11,6 +11,7 @@ import NotFoundPage from './pages/NotFoundPage';
 import { HeaderProvider } from './context/HeaderContext';
 import LoginPage from './pages/LoginPage';
 import { ProtectedRoute } from './ui';
+import ErrorBoundary from './features/ErrorBoundaries/ErrorBoundary';
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,29 +23,32 @@ const queryClient = new QueryClient({
 
 function App() {
   return (
-    <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
-      <HeaderProvider>
-        <BrowserRouter>
-          <Routes>
-            <Route
-              element={
-                <ProtectedRoute>
-                  <AppLayout />
-                </ProtectedRoute>
-              }
-            >
-              <Route index element={<Navigate to='reports/5' replace />} />
-              <Route path='reports/:reportId' element={<ReportPage />} />
-              <Route path='engineers/7' element={<EngineersListPage />} />
-              <Route path='engineers/8' element={<SingleEngineerPage />} />
-            </Route>
-            <Route path='/login' element={<LoginPage />} />
-            <Route path='*' element={<NotFoundPage />} />
-          </Routes>
-        </BrowserRouter>
-      </HeaderProvider>
-    </QueryClientProvider>
+    
+      <QueryClientProvider client={queryClient}>
+        <ReactQueryDevtools initialIsOpen={false} />
+        <HeaderProvider>
+          <BrowserRouter>
+          <ErrorBoundary hasNavigation={false}>
+            <Routes>
+              <Route
+                element={
+                  <ProtectedRoute>
+                    <AppLayout />
+                  </ProtectedRoute>
+                }
+              >
+                <Route index element={<Navigate to='reports/5' replace />} />
+                <Route path='reports/:reportId' element={<ReportPage />} />
+                <Route path='engineers/7' element={<EngineersListPage />} />
+                <Route path='engineers/8' element={<SingleEngineerPage />} />
+              </Route>
+              <Route path='/login' element={<LoginPage />} />
+              <Route path='*' element={<NotFoundPage />} />
+            </Routes>
+            </ErrorBoundary>
+          </BrowserRouter>
+        </HeaderProvider>
+      </QueryClientProvider>
   );
 }
 

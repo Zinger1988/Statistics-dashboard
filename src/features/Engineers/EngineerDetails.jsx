@@ -11,7 +11,7 @@ function EngineerDetails({ engineer }) {
       )
       .flat();
   };
-
+  
   return (
     <div className='grid grid-cols-1 items-start gap-5'>
       <Box label='Флаги сотрудника'>

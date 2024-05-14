@@ -14,7 +14,7 @@ function LineChartList({ data, isLoading, className = '' }) {
       )}
       <Legend data={getLegend(item.lines)} className='mb-3' />
       <div className='h-96'>
-        <ResponsiveLine {...calcLineChartSettings(item)} />
+          <ResponsiveLine {...calcLineChartSettings(item)} />
       </div>
     </Box>
   ));
