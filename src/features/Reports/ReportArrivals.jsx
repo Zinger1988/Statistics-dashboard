@@ -4,8 +4,6 @@ import Filter from './Filter';
 function ReportArrivals({ reportData, isRefetching }) {
   const { filters, data } = reportData;
 
-  console.log(data);
-
   return (
     <div>
       <Accordion active='filter' className='mb-5'>
@@ -29,14 +27,22 @@ function ReportArrivals({ reportData, isRefetching }) {
         {isRefetching && (
           <Loader className='absolute left-0 top-0 z-10 flex h-full w-full items-center justify-center bg-slate-950/70' />
         )}
-        <Table columns='grid-cols-[1.1fr_1.5fr_3fr_1.3fr_1.5fr_1.5fr_1.5fr_1.6fr_1.5fr]'>
+        <Table>
           <Table.Heading
             data={data.head}
-            render={(cell, i) => (
-              <Table.Cell className='p-3 text-xs' key={i}>
-                {cell}
-              </Table.Cell>
-            )}
+            render={(cell, i, arr, onClick, sortByColumn, sortOrder) => {
+              return (
+                <Table.Cell
+                  className='cursor-pointer p-3 text-xs'
+                  key={i}
+                  onClick={onClick}
+                  sortByColumn={sortByColumn === i}
+                  sortOrder={sortOrder}
+                >
+                  {cell}
+                </Table.Cell>
+              );
+            }}
           />
           <Table.Body
             data={data.rows}

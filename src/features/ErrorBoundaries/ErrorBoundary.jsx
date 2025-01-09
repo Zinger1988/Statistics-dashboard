@@ -31,7 +31,7 @@ class ErrorBoundaryInner extends Component {
     const handlePostMessage = async () => {
       try {
         setIsLoading(true);
-        // await postMessage({errors});
+        await postMessage({ errors });
         setReportStatus('success');
       } catch (e) {
         setReportStatus('error');

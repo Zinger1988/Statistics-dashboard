@@ -1,9 +1,13 @@
-import { createContext, useContext, useState } from 'react';
+import { createContext, useContext, useEffect, useState } from 'react';
 
 const TabsContext = createContext();
 
 function Tabs({ active = '', children }) {
   const [activeTab, setActiveTab] = useState(active);
+
+  useEffect(() => {
+    setActiveTab(active);
+  }, [active]);
 
   return (
     <TabsContext.Provider value={{ activeTab, setActiveTab }}>
@@ -12,10 +16,11 @@ function Tabs({ active = '', children }) {
   );
 }
 
-function TabsHead({ children, className }) {
+function TabsHead({ children, className, ...props }) {
   return (
     <div
       className={`mb-4 flex shadow-[inset_0_-1px_0_0_theme(colors.slate.600)] ${className}`}
+      {...props}
     >
       {children}
     </div>

@@ -25,8 +25,6 @@ function Menu({ className = '', ...props }) {
   }
 
   const renderMenu = (menu, menuLevel = 0) => {
-    const sortedMenu = [...menu].sort((a, b) => (a.title > b.title ? 1 : -1));
-
     let sublistCssClass;
     let listItemCssClass;
 
@@ -52,7 +50,7 @@ function Menu({ className = '', ...props }) {
           'group-hover/item0:cursor-pointer group-hover/item0:border-l-blue-500 group-hover/item0:bg-slate-700';
     }
 
-    const listItem = sortedMenu.map((item) => {
+    const listItem = menu.map((item) => {
       const { title, subtitle, code, childs, layout, group } = item;
       const hasChilds = childs.length > 0;
       const link = item.type === 'rep' ? { to: `reports/${code}` } : {};

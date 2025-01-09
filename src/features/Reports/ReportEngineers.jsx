@@ -5,12 +5,31 @@ function ReportEngineers({ list }) {
   const { data } = list;
 
   const getLegend = (data) => {
-    return data
-      .map(({ data }) =>
-        data.map(({ subLabel, color }) => ({ id: subLabel, color })),
-      )
-      .flat();
+    const legendFlatData = data.map((item) => {
+      return item.chart.lines.map(({ data }) => data);
+    });
+
+    const legendData = legendFlatData
+      .flat()
+      .flat()
+      .reduce((acc, cur) => {
+        const { subLabel, color, value } = cur;
+
+        const foundedParam = acc.find((param) => param.id === subLabel);
+
+        if (foundedParam) {
+          foundedParam.value += value;
+        } else {
+          acc.push({ id: subLabel, color, value });
+        }
+
+        return acc;
+      }, []);
+
+    return legendData;
   };
+
+  getLegend(data);
 
   // Calculating biggest chart bar value to build charts with equal relative sizes
   const maxChartValue = data
@@ -26,8 +45,8 @@ function ReportEngineers({ list }) {
     .reduce((acc, cur) => (acc > cur ? acc : cur), 0);
 
   return (
-    <Box label='Сотрудники - флаги'>
-      <Legend data={getLegend(data[0].chart.lines)} className='mb-8' />
+    <Box>
+      <Legend data={getLegend(data)} className='mb-3' />
       {data.map(({ id, name, stats, chart }) => (
         <EngineerCard
           key={id}
@@ -36,7 +55,7 @@ function ReportEngineers({ list }) {
           stats={stats}
           maxChartValue={maxChartValue}
           chartSettings={chart.lines}
-          className='mb-6 border-b border-slate-600 pb-6 last:m-0 last:border-none last:p-0'
+          className='mb-4 border-b border-slate-600 pb-4 last:m-0 last:border-none last:p-0'
         />
       ))}
     </Box>

@@ -6,7 +6,7 @@ function StatsTable({ stats, className = '' }) {
       {stats.map((item) => (
         <div
           key={item.label}
-          className='flex items-baseline justify-between gap-2 p-3 px-4 text-sm shadow-[1px_1px_0_0_theme(colors.slate.700)]'
+          className='flex items-baseline justify-between gap-1 p-2 px-4 text-sm shadow-[1px_1px_0_0_theme(colors.slate.700)]'
         >
           <span className='text-slate-500'>{item.label}</span>
           <span className='font-medium'>{item.value || '-'}</span>

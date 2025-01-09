@@ -1,52 +1,88 @@
+import { useEffect, useState } from 'react';
+
+import { useLocation } from 'react-router-dom';
 import EngineerCard from './EngineerCard';
 import { Box, GaugeChart, Table, Tabs, Icon, Legend } from '../../ui';
 
 function ReportEngineer({ engineer }) {
-  const { name, stats, chart, details, statsRelative } = engineer.data;
+  const { id, name, stats, chart, details, statsRelative } = engineer.data;
+  const { hash } = useLocation();
+  const [anchor, setAnchor] = useState(decodeURI(hash).slice(1));
+  const isValidAnchor = details.some((item) => item.label === anchor);
+
+  useEffect(() => {
+    let timeoutId = null;
+    setAnchor(decodeURI(hash).slice(1));
+
+    if (isValidAnchor) {
+      timeoutId = setTimeout(() => {
+        document
+          .getElementById('hashTarget')
+          ?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }, 100);
+    }
+
+    return () => clearTimeout(timeoutId);
+  }, [hash, isValidAnchor]);
 
   const getLegend = (data) => {
     return data
       .map(({ data }) =>
-        data.map(({ subLabel, color }) => ({ id: subLabel, color })),
+        data.map(({ subLabel, color, value }) => ({
+          id: subLabel,
+          color,
+          value,
+        })),
       )
       .flat();
   };
 
   return (
     <div className='grid grid-cols-1 items-start gap-5'>
-      <Box label='Флаги сотрудника'>
+      <Box>
         <Legend data={getLegend(engineer.data.chart.lines)} className='mb-8' />
         <EngineerCard
+          id={id}
           name={name}
           stats={stats}
           chartSettings={chart.lines}
-          className='mb-6 border-b border-slate-600 pb-6'
+          className='mb-6 border-b border-slate-600 pb-6 last:border-none last:pb-0'
         />
-        <div className='mb-2 flex gap-12'>
-          {statsRelative.map((item) => (
-            <GaugeChart key={item.id} data={item} className='w-44' />
-          ))}
-        </div>
+        {statsRelative.length > 0 && (
+          <div className='mb-2 flex gap-12'>
+            {statsRelative.map((item) => (
+              <GaugeChart key={item.id} data={item} className='w-44' />
+            ))}
+          </div>
+        )}
       </Box>
-      <Box label='Детализація по співробітнику і прапору'>
-        <Tabs active={0}>
-          <Tabs.TabsHead>
+      <Box>
+        <Tabs active={isValidAnchor ? anchor : details[0].label}>
+          <Tabs.TabsHead id='hashTarget'>
             {details.map((item, i) => (
-              <Tabs.TabsToggler key={i} tabId={i}>
+              <Tabs.TabsToggler key={i} tabId={item.label}>
                 {item.label}
               </Tabs.TabsToggler>
             ))}
           </Tabs.TabsHead>
           {details.map((tab, i) => (
-            <Tabs.TabsContent key={i} tabId={i}>
-              <Table columns='grid-cols-[1.1fr_1.5fr_3fr_1.3fr_1.5fr_1.5fr_1.5fr_1.6fr_1.16fr_1.5fr]'>
+            <Tabs.TabsContent key={i} tabId={tab.label}>
+              <Table>
                 <Table.Heading
                   data={tab.head}
-                  render={(cell, i) => (
-                    <Table.Cell className='p-3 text-xs' key={i}>
-                      {cell}
-                    </Table.Cell>
-                  )}
+                  render={(cell, i, arr, onClick, sortByColumn, sortOrder) => {
+                    return (
+                      <Table.Cell
+                        className='cursor-pointer p-3 text-xs'
+                        key={i}
+                        onClick={onClick}
+                        sortByColumn={sortByColumn === i}
+                        sortOrder={sortOrder}
+                      >
+                        {cell}
+                      </Table.Cell>
+                    );
+                  }}
                 />
                 <Table.Body
                   data={tab.rows}
