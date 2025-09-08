@@ -1,6 +1,6 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { Navigate, BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import AppLayout from './layouts/AppLayout';
 import LoginPage from './pages/LoginPage';
@@ -8,7 +8,7 @@ import ReportPage from './pages/ReportPage';
 import NotFoundPage from './pages/NotFoundPage';
 
 import { HeaderProvider } from './context/HeaderContext';
-import { ProtectedRoute } from './ui';
+import { ProtectedRoute, DefaultRoute } from './ui';
 import ErrorBoundary from './features/ErrorBoundaries/ErrorBoundary';
 
 const queryClient = new QueryClient({
@@ -34,7 +34,7 @@ function App() {
                   </ProtectedRoute>
                 }
               >
-                <Route index element={<Navigate to='reports/5' replace />} />
+                <Route index element={<DefaultRoute />} />
                 <Route path='reports/:reportId' element={<ReportPage />} />
               </Route>
               <Route path='/login' element={<LoginPage />} />

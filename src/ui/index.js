@@ -15,3 +15,4 @@ export { default as Select } from './Select';
 export { default as StatsTable } from './StatsTable';
 export { default as Table } from './Table';
 export { default as Tabs } from './Tabs';
+export { default as DefaultRoute } from './DefaultRoute';
